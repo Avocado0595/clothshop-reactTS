@@ -1,14 +1,19 @@
 import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import Homepage from './pages/homepage/Homepage'
-
+import {
+  Link,
+  PathMatch,
+  Route, RouteMatch, Routes, useLocation, useMatch, useNavigate, useParams, useRoutes, useSearchParams
+} from "react-router-dom";
+import ShopPage from './pages/shoppage/ShopPage';
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-      <Homepage/>
+      <Routes>
+        <Route index element={<Homepage />}/>
+        <Route path="/shop" element={<ShopPage />}/>
+      </Routes>
     </div>
   )
 }

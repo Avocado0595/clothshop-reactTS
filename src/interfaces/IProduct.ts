@@ -1,6 +1,6 @@
 export default interface IProduct{
-    title: string,
-      imageUrl: string,
-      id: number,
-      linkUrl: string
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
 }
