@@ -1,0 +1,11 @@
+.signin-and-signup{
+    padding: 0 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+@media (max-width: 992px) and (min-width: 480px) {
+    .signin-and-signup{
+        flex-direction: column;
+    }
+}

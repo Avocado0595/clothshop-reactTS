@@ -1,0 +1,31 @@
+.form-group{
+    padding: 8px 0px;
+    width: 100%;
+    min-width: 350px;
+    position: relative;
+    &__label{
+        position: absolute;
+        left: 0;
+        top: 28px;
+        color: #999;
+        z-index: 10;
+    }
+    &__input{
+        font-size: 16px;
+        position: relative;
+        padding: 32px 0px 5px 0;
+        width: 100%;
+        outline: 0;
+        border: 0;
+        box-shadow: 0 1px 0 0 #808080;
+        transition: box-shadow 150ms ease-out;
+        &:focus{
+            box-shadow: 0 2px 0 0 rgb(59, 59, 64);
+        }
+        &:focus ~ .form-group__label, &:not(:placeholder-shown) ~ .form-group__label {
+            top: 12px;
+            font-size: smaller;
+            transition: all 0.2s;
+        }
+    }
+}

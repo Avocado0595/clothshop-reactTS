@@ -8,10 +8,13 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import UserContext from './context/userContext'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    
       <App/>
+    
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

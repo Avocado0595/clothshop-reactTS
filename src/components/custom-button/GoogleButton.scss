@@ -1,0 +1,15 @@
+$subcolor: white;
+$maincolor: #4285f4;
+.google-btn{
+    font-size: 18px;
+    margin-top: 32px;
+    background-color: $maincolor;
+    border: solid 1px $maincolor;
+    color: $subcolor;
+    width: 300px;
+    height: 60px;
+    &:hover{
+        background-color: #3578e7;
+        cursor: pointer;
+    }
+}

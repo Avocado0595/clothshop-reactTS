@@ -1,7 +1,7 @@
-$gap:8px;
+$gap:16px;
 .collection-preview{
     width: 100%;
-    padding: 0 32px;
+    padding: 0 62px;
     .title{
         text-align: left;
         margin-left: $gap;
@@ -13,7 +13,7 @@ $gap:8px;
         display: flex;
         flex-wrap: wrap;
         .preview-item{
-            $item-height:300px;
+            $item-height:420px;
             height: $item-height;
             width: calc(25% - $gap*2);
             margin: $gap;
