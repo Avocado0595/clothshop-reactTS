@@ -1,20 +1,19 @@
-.header{
-    padding: 16px 32px 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .header-logo{
-        display: block;
-    }
-    .header-menu{
-        
-        .header-item{
-            text-decoration: none;
-            color: black;
-            margin:0 8px;
-        }
-        a:hover{
-            cursor: pointer;
-        }
-    }
+.header {
+	padding: 16px 32px 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.header-logo {
+		display: block;
+	}
+	.header-menu {
+		.header-item {
+			text-decoration: none;
+			color: black;
+			margin: 0 8px;
+		}
+		a:hover {
+			cursor: pointer;
+		}
+	}
 }

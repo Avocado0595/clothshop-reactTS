@@ -4,9 +4,9 @@ import MenuItem from '../../components/menu-item/MenuItem';
 import './Homepage.scss';
 
 export default function Homepage() {
-  return (
-    <div className='homepage'>
-      <Directory/>
-    </div>
-  )
+	return (
+		<div className="homepage">
+			<Directory />
+		</div>
+	);
 }

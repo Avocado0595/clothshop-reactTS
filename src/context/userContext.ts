@@ -1,5 +1,7 @@
-import React from "react";
-import IAccount from "../interfaces/IAccount";
+import React from 'react';
+import IAccount from '../interfaces/IAccount';
 
-const UserContext = React.createContext<Omit<IAccount,'password'>|null>(null);
+const UserContext = React.createContext<Omit<IAccount, 'password'> | null>(
+	null
+);
 export default UserContext;

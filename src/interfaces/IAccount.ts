@@ -1,5 +1,5 @@
-export default interface IAccount{
-    displayName: string,
-    email:string,
-    password: string
+export default interface IAccount {
+	displayName: string;
+	email: string;
+	password: string;
 }

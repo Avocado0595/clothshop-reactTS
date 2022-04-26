@@ -1,17 +1,16 @@
-
 $maincolor: black;
 $subcolor: white;
-.custom-btn{
-    font-size: 18px;
-    margin-top: 32px;
-    background-color: $maincolor;
-    border: solid 1px $maincolor;
-    color: $subcolor;
-    width: 200px;
-    height: 60px;
-    &:hover{
-        background-color: $subcolor;
-        color: $maincolor;
-        cursor: pointer;
-    }
+.custom-btn {
+	font-size: 18px;
+	margin-top: 32px;
+	background-color: $maincolor;
+	border: solid 1px $maincolor;
+	color: $subcolor;
+	width: 200px;
+	height: 60px;
+	&:hover {
+		background-color: $subcolor;
+		color: $maincolor;
+		cursor: pointer;
+	}
 }
