@@ -35,8 +35,10 @@ import IUser from './interfaces/IUser';
 import { connect } from 'react-redux';
 import { IAction } from './redux/user/user.reducer';
 import { IRootReducer } from './redux/rootReducer';
+import CartCheckout from './pages/cart-checkout/CartCheckout';
 
 const auth = getAuth();
+
 
 const App: FC<{ currentUser:IUser|null, setCurrentUser: (user: IUser) => IAction,clearCurrentUSer: () => IAction }> = ({
 	currentUser, setCurrentUser,clearCurrentUSer
@@ -73,6 +75,7 @@ const App: FC<{ currentUser:IUser|null, setCurrentUser: (user: IUser) => IAction
 			<Routes>
 				<Route index element={<Homepage />} />
 				<Route path="/shop" element={<ShopPage />} />
+				<Route path="/checkout" element={<CartCheckout />} />
 				<Route path="/signin" element={currentUser?<Navigate to="/" replace />:<SignInAndSignUp />}/>
 			</Routes>
 		</div>

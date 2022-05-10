@@ -1,0 +1,39 @@
+table {
+    border-collapse: collapse; /*border in here @@*/
+    width: 100%;
+  }
+  
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+
+.product-img{
+    width: 100px;
+}
+.count-column{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 18px;
+  .icon-arrow{
+    cursor: pointer;
+    div{
+      margin: 0 8px;
+      svg{
+        height: 36px;
+        width: 24px;
+      }
+    }
+  }
+}
+.icon-trash{
+  cursor: pointer;
+  width: 24px;
+  margin: auto;
+    div{
+      svg{
+        height: 36px;
+        width: 24px;
+      }
+    }
+}

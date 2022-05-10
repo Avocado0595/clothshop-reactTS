@@ -1,21 +1,25 @@
+import { FC } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import IProduct from '../../interfaces/IProduct';
+import { addItem } from '../../redux/cart/cart.action';
+import { IRootReducer } from '../../redux/rootReducer';
 import './PreviewCollection.scss';
-export default function PreviewCollection(props: {
+const PreviewCollection:FC<{addItem: (item:IProduct)=>any,
 	title: string;
-	itemList: IProduct[];
-}) {
+	itemList: IProduct[];}> = ({addItem, title, itemList}) => {
 	return (
 		<div className="collection-preview">
-			<h2 className="title">{props.title.toUpperCase()}</h2>
+			<h2 className="title">{title.toUpperCase()}</h2>
 			<div className="preview">
-				{props.itemList.map((item) => (
+				{itemList.map((item) => (
 					<div className="preview-item" key={item.id}>
 						<div
 							className="item-img"
 							style={{ backgroundImage: `url(${item.imageUrl})` }}
 						>
 							<div className="item-modal"></div>
-							<div className="item-addcart">
+							<div onClick={()=>addItem(item)} className="item-addcart">
 								<p>ADD TO CART</p>
 							</div>
 						</div>
@@ -31,3 +35,8 @@ export default function PreviewCollection(props: {
 		</div>
 	);
 }
+
+const mapDispatchToProp = (dispatch:Dispatch)=>({
+	addItem: (item: IProduct) => dispatch(addItem(item))
+})
+export default connect(null, mapDispatchToProp)(PreviewCollection);

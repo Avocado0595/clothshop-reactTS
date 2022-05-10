@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import  { FC } from 'react';
 import ICategory from '../../interfaces/ICategory';
 import MenuItem from '../menu-item/MenuItem';
 import './Directory.scss';
-import SHOP_DATA from '../../database';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectDirectorySection } from '../../redux/directory/directory.selector';
 
-export default function Directory() {
-	const [categoryList, setCategoryList] =
-		useState<Array<ICategory>>(SHOP_DATA);
+const Directory:FC<{categoryList:Array<ICategory>}> = ({categoryList})=> {
 	return (
 		<div className="directory-menu">
 			{categoryList.map((item) => (
@@ -15,3 +15,7 @@ export default function Directory() {
 		</div>
 	);
 }
+const mapStateToProps = createStructuredSelector({
+	categoryList: selectDirectorySection
+});
+export default connect(mapStateToProps)(Directory);

@@ -7,6 +7,7 @@ import {
 	getFirestore,
 	setDoc,
 } from 'firebase/firestore';
+
 //import auth from 'firebase/auth';
 import {
 	Auth,
@@ -17,9 +18,11 @@ import {
 	updateProfile,
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
+
 //import auth from "firebase/auth";
+
 const config = {
-	apiKey: 'AIzaSyDwmehGHZTstWFYRkTIZGlgLiVEPLD0IWo',
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
 	authDomain: 'clothshop-b6cc2.firebaseapp.com',
 	projectId: 'clothshop-b6cc2',
 	storageBucket: 'clothshop-b6cc2.appspot.com',

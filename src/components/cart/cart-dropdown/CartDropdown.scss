@@ -1,0 +1,44 @@
+.cart-dropdown{
+	position: absolute;
+	width: 250px;
+	height: auto;
+	background-color: white;
+	right:55px;
+	top: 75px;
+	z-index: 999;
+	border: 1px solid #555;
+	.cart-list{
+		overflow-y: scroll;
+		max-height:300px;
+	}
+	::-webkit-scrollbar {
+		width: 10px;
+		}
+		::-webkit-scrollbar-track {
+		background: #f1f1f1; 
+		}
+		
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		background: #888; 
+		}
+		
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		background: #555; 
+		}
+	.cart-btn{
+		margin-top: 8px;
+		font-size: 18px;
+		color:white;
+		background-color: black;
+		width: 200px;
+		height: 50px;
+		margin-bottom: 8px;
+		cursor: pointer;
+		&:hover{
+			background-color: white;
+			color: black;
+		}
+	}
+}
