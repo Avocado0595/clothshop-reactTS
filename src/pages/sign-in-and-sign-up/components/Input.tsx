@@ -1,11 +1,13 @@
+import ErrorAlert from '../../../components/error-badge/ErrorAlert';
 import './Input.scss';
 export default function Input(props: {
 	label: string;
 	name: string;
 	type: string;
 	required?: boolean;
+	errMessage?: string;
 }) {
-	const { name, type, required, label } = props;
+	const { name, type, required, label, errMessage } = props;
 	return (
 		<div className="form-group">
 			<input
@@ -19,6 +21,7 @@ export default function Input(props: {
 			<label className="form-group__label" htmlFor={name}>
 				{label}
 			</label>
+			{errMessage ? <ErrorAlert message={errMessage} /> : null}
 		</div>
 	);
 }

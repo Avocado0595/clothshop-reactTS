@@ -7,7 +7,7 @@ export const setCurrentUser = (user: IUser): IAction => ({
 	payload: user as IUser,
 });
 
-export const clearCurrentUser = ():IAction=>({
+export const clearCurrentUser = (): IAction => ({
 	type: UserActionTypes.CLEAR_CURRENT_USER,
-	payload: null
-})
+	payload: null,
+});

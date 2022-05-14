@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+
 import {
 	addDoc,
 	collection,
@@ -7,19 +8,20 @@ import {
 	getFirestore,
 	setDoc,
 } from 'firebase/firestore';
+
 //import auth from 'firebase/auth';
 import {
-	Auth,
 	createUserWithEmailAndPassword,
 	getAuth,
-	GoogleAuthProvider,
+	setPersistence,
+	browserSessionPersistence,
 	signOut,
 	updateProfile,
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
-//import auth from "firebase/auth";
+
 const config = {
-	apiKey: 'AIzaSyDwmehGHZTstWFYRkTIZGlgLiVEPLD0IWo',
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
 	authDomain: 'clothshop-b6cc2.firebaseapp.com',
 	projectId: 'clothshop-b6cc2',
 	storageBucket: 'clothshop-b6cc2.appspot.com',
@@ -31,7 +33,6 @@ const app = initializeApp(config);
 const initauth = getAuth(app);
 const auth = getAuth();
 
-//export const signInWithGoogle = () => auth.signInWithPopup(initauth, provider);
 export const createUser = async (
 	account: Omit<IAccount, 'displayName'> & { displayName?: string }
 ) => {
@@ -44,7 +45,6 @@ export const createUser = async (
 		const user = userCredential.user;
 		if (account.displayName)
 			updateProfile(user, { displayName: account.displayName });
-		console.log(user);
 	} catch (err) {
 		console.log(err);
 	}
@@ -52,7 +52,6 @@ export const createUser = async (
 export const ggSignOut = () =>
 	signOut(auth)
 		.then(() => {
-			console.log('sign out');
 			localStorage.removeItem('myclothToken');
 			// Sign-out successful.
 		})
@@ -63,7 +62,6 @@ export const createUserProfile = async (user: any) => {
 	try {
 		const docRef = doc(db, 'users', `${user.uid}`);
 		const snapShot = await getDoc(docRef);
-		//   if(!snapShot)
 		await setDoc(docRef, {
 			displayName: user.displayName,
 			email: user.email,
@@ -72,6 +70,16 @@ export const createUserProfile = async (user: any) => {
 		console.error('Error adding document: ', e);
 	}
 };
+export const setPersistenceFirebase = setPersistence(
+	auth,
+	browserSessionPersistence
+)
+	.then(() => {
+		return null;
+	})
+	.catch((error) => {
+		console.log(error);
+	});
 export const db = getFirestore(app);
 
 export default initauth;
