@@ -22,7 +22,7 @@ const userReducer = (
 		case UserActionTypes.CLEAR_CURRENT_USER:
 			return {
 				...state,
-				currentUser: null
+				currentUser: null,
 			};
 		default:
 			return state;

@@ -1,16 +1,16 @@
-.cart-item-layout{
-    display:flex;
-    flex-direction: row;
-    .cart-item-img{
-        width: 60px;
-    }
-    padding: 8px;
-    .cart-item-info{
-        margin-left: 16px;
-        p {
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-    }
+.cart-item-layout {
+	display: flex;
+	flex-direction: row;
+	.cart-item-img {
+		width: 60px;
+	}
+	padding: 8px;
+	.cart-item-info {
+		margin-left: 16px;
+		p {
+			padding: 0;
+			margin: 0;
+			text-align: left;
+		}
+	}
 }

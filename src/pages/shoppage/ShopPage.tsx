@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
-import {createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
 
 import ICategory from '../../interfaces/ICategory';
 import { selectDirectorySection } from '../../redux/directory/directory.selector';
-const ShopPage:FC<{collection: Array<ICategory>}> = ({collection})=> {
+const ShopPage: FC<{ collection: Array<ICategory> }> = ({ collection }) => {
 	return (
 		<div>
 			SHOP_PAGE
@@ -18,7 +18,9 @@ const ShopPage:FC<{collection: Array<ICategory>}> = ({collection})=> {
 			))}
 		</div>
 	);
-}
+};
 
-const mapStateToProps = createStructuredSelector({collection: selectDirectorySection});
+const mapStateToProps = createStructuredSelector({
+	collection: selectDirectorySection,
+});
 export default connect(mapStateToProps)(ShopPage);

@@ -32,7 +32,11 @@ export default function GoogleButton() {
 			});
 	};
 	return (
-		<button type='button' onClick={handleGoogleSignIn} className="google-btn">
+		<button
+			type="button"
+			onClick={handleGoogleSignIn}
+			className="google-btn"
+		>
 			SIGN IN WITH GOOGLE
 		</button>
 	);

@@ -14,15 +14,15 @@ import CartdDropdown from '../cart/cart-dropdown/CartdDropdown';
 import CartIcon from '../cart/cart-icon/CartIcon';
 import { selectToggleCart } from '../../redux/cart/cart.selector';
 
-
-const Header: FC<{ currentUser: IUser | null, clearCurrentUser: () => IAction,
-	toggleCart: boolean}> 
-= ({ currentUser, clearCurrentUser, toggleCart }) =>
- {
-	const handleSignOut = async()=>{
+const Header: FC<{
+	currentUser: IUser | null;
+	clearCurrentUser: () => IAction;
+	toggleCart: boolean;
+}> = ({ currentUser, clearCurrentUser, toggleCart }) => {
+	const handleSignOut = async () => {
 		await ggSignOut();
 		clearCurrentUser();
-	}
+	};
 	return (
 		<div className="header">
 			<Link to="/" className="header-link">
@@ -44,19 +44,18 @@ const Header: FC<{ currentUser: IUser | null, clearCurrentUser: () => IAction,
 						SIGN OUT
 					</a>
 				)}
-				<CartIcon/>
-				
+				<CartIcon />
 			</div>
-			{toggleCart?null:<CartdDropdown/>}
+			{toggleCart ? null : <CartdDropdown />}
 		</div>
 	);
 };
 
 const mapStateToProps = (state: IRootReducer) => ({
 	currentUser: state.user.currentUser,
-	toggleCart: selectToggleCart(state)
+	toggleCart: selectToggleCart(state),
 });
-const mapDispatchToProp = (dispatch: Dispatch) =>({
-	clearCurrentUser: ()=>dispatch(clearCurrentUser()),
-})
+const mapDispatchToProp = (dispatch: Dispatch) => ({
+	clearCurrentUser: () => dispatch(clearCurrentUser()),
+});
 export default connect(mapStateToProps, mapDispatchToProp)(Header);

@@ -10,8 +10,10 @@ import {
 } from 'firebase/auth';
 //const auth = getAuth();
 import initauth, { createUser } from '../../../firebase/firebase.utils';
+import './SignUp.scss';
 
 export default function SignUp() {
+	const [errMessage, setErrMessage] = useState<Record<string,string>>();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
@@ -24,11 +26,18 @@ export default function SignUp() {
 		const email = target.emailSignUp.value;
 		const password = target.passwordSignUp.value;
 		const confirmPassword = target.confirmPassword.value;
-		await createUser({ email, password, displayName });
+		try{
+			await createUser({ email, password, displayName });
+		}
+		catch(e){
+			if((e as Error).message.includes('user')){
+				setErrMessage({email: 'Invalid user name.'});
+			}
+		}
 	};
 
 	return (
-		<div className="sign-in">
+		<div className="sign-up">
 			<h2>I don't have any account</h2>
 			<span>Sign up with your email and password</span>
 			<form onSubmit={handleSubmit}>

@@ -1,5 +1,5 @@
-import ICategory from "../../interfaces/ICategory";
+import ICategory from '../../interfaces/ICategory';
 
-export interface IDirectoryReducer{
-    section: Array<ICategory>
+export interface IDirectoryReducer {
+	section: Array<ICategory>;
 }
