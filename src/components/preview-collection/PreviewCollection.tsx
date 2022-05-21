@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
+import { Col, Container, Row } from 'reactstrap';
 import { Dispatch } from 'redux';
 import IProduct from '../../interfaces/IProduct';
 import { addItem } from '../../redux/cart/cart.action';
@@ -11,11 +12,11 @@ const PreviewCollection: FC<{
 	itemList: IProduct[];
 }> = ({ addItem, title, itemList }) => {
 	return (
-		<div className="collection-preview">
+		<Container className="collection-preview">
 			<h2 className="title">{title.toUpperCase()}</h2>
-			<div className="preview">
+			<Row xs="2" md="3" lg="4" className="preview">
 				{itemList.map((item) => (
-					<div className="preview-item" key={item.id}>
+					<Col className="preview-item" key={item.id}>
 						<div
 							className="item-img"
 							style={{ backgroundImage: `url(${item.imageUrl})` }}
@@ -34,10 +35,10 @@ const PreviewCollection: FC<{
 								${item.price}
 							</div>
 						</div>
-					</div>
+					</Col>
 				))}
-			</div>
-		</div>
+			</Row>
+		</Container>
 	);
 };
 

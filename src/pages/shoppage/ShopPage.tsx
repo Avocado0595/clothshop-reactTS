@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
 
-import ICategory from '../../interfaces/ICategory';
+import ICollection from '../../interfaces/ICollection';
 import { selectDirectorySection } from '../../redux/directory/directory.selector';
-const ShopPage: FC<{ collection: Array<ICategory> }> = ({ collection }) => {
+const ShopPage: FC<{ collection: Array<ICollection> }> = ({ collection }) => {
 	return (
 		<div>
 			SHOP_PAGE

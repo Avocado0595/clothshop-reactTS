@@ -1,12 +1,12 @@
-import React, { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
-import ICategory from '../../interfaces/ICategory';
+import ICollection from '../../interfaces/ICollection';
 import { selectDirectorySection } from '../../redux/directory/directory.selector';
 
-const Category: FC<{ categoryList: ICategory[] }> = ({ categoryList }) => {
+const Category: FC<{ categoryList: ICollection[] }> = ({ categoryList }) => {
 	const { categoryName } = useParams();
 	const category = categoryList.filter(
 		(i) => i.title.toLowerCase() === categoryName

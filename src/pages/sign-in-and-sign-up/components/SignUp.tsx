@@ -11,6 +11,7 @@ import {
 //const auth = getAuth();
 import initauth, { createUser } from '../../../firebase/firebase.utils';
 import './SignUp.scss';
+import { Col } from 'reactstrap';
 
 export default function SignUp() {
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
@@ -36,7 +37,7 @@ export default function SignUp() {
 	};
 
 	return (
-		<div className="sign-up">
+		<Col className="sign-up">
 			<h2>I don't have any account</h2>
 			<span>Sign up with your email and password</span>
 			<form onSubmit={handleSubmit}>
@@ -68,6 +69,6 @@ export default function SignUp() {
 					<CustomButton type="submit" content="sign up" />
 				</div>
 			</form>
-		</div>
+		</Col>
 	);
 }

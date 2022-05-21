@@ -2,12 +2,12 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import CustomButton from '../../../components/custom-button/CustomButton';
 import GoogleButton from '../../../components/custom-button/GoogleButton';
-import IAccount from '../../../interfaces/IAccount';
 import Input from './Input';
 import './SignIn.scss';
 import initauth from '../../../firebase/firebase.utils';
 import Loading from '../../../components/loading-icon/Loading';
-import ErrorBadge from '../../../components/error-badge/ErrorAlert';
+import { Col } from 'reactstrap';
+
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
@@ -34,7 +34,7 @@ export default function SignIn() {
 	};
 
 	return (
-		<div className="sign-in">
+		<Col className="sign-in">
 			{isLoadingState ? (
 				<div className="loading-modal">
 					<Loading />
@@ -42,7 +42,7 @@ export default function SignIn() {
 			) : null}
 			<h2>I already have an account</h2>
 			<span>Sign in with your email and password</span>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} onChange={()=>setErrMessage(undefined)}>
 				<Input
 					label="Email"
 					type="email"
@@ -62,6 +62,6 @@ export default function SignIn() {
 					<GoogleButton />
 				</div>
 			</form>
-		</div>
+		</Col>
 	);
 }

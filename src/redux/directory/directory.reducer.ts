@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import ICategory from '../../interfaces/ICategory';
+import ICollection from '../../interfaces/ICollection';
 import { IDirectoryReducer } from './directory.interface';
 
 const initialState = {

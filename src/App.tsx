@@ -1,32 +1,12 @@
 import { FC, useEffect } from 'react';
 import './App.css';
 import Homepage from './pages/homepage/Homepage';
-<<<<<<< HEAD
 import { Navigate, Route, Routes } from 'react-router-dom';
-=======
-import {
-	Navigate,
-	Route,
-	Routes,
-} from 'react-router-dom';
->>>>>>> 6fe6b58f567741d6954b19ed72a99e0a09b9397e
 import ShopPage from './pages/shoppage/ShopPage';
 import Header from './components/header/Header';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/SignInAndSignUp';
-
-<<<<<<< HEAD
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
 import { createUserProfile } from './firebase/firebase.utils';
-=======
-import {
-	getAuth,
-	onAuthStateChanged,
-	
-} from 'firebase/auth';
-
-import {  createUserProfile } from './firebase/firebase.utils';
->>>>>>> 6fe6b58f567741d6954b19ed72a99e0a09b9397e
 import { Dispatch } from 'redux';
 import { clearCurrentUser, setCurrentUser } from './redux/user/user.action';
 import IUser from './interfaces/IUser';
@@ -34,7 +14,7 @@ import { connect } from 'react-redux';
 import { IAction } from './redux/user/user.reducer';
 import { IRootReducer } from './redux/rootReducer';
 import CartCheckout from './pages/cart-checkout/CartCheckout';
-import Category from './pages/category/Category';
+import Category from './pages/collection/Collection';
 
 const auth = getAuth();
 

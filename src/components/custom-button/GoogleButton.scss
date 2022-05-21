@@ -1,15 +1,22 @@
-$subcolor: white;
-$maincolor: #4285f4;
+$backgroundcolor: white;
+$textcolor: black;
 .google-btn {
+	border-radius: 4px;
 	font-size: 18px;
 	margin-top: 32px;
-	background-color: $maincolor;
-	border: solid 1px $maincolor;
-	color: $subcolor;
+	background-color: $backgroundcolor;
+	border: solid 1px #00000033;
+	color: $textcolor;
 	width: 300px;
 	height: 60px;
 	&:hover {
-		background-color: #3578e7;
+		background-color: rgb(240, 240, 240);
 		cursor: pointer;
+	}
+	margin-left: 36px;
+	.google-btn--logo{
+		width: 24px;
+		margin-right: 8px;
+		margin-top: -7px;
 	}
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
-import ICategory from '../../interfaces/ICategory';
+import ICollection from '../../interfaces/ICollection';
 import './MenuItem.scss';
-export default function MenuItem(props: { item: ICategory }) {
+export default function MenuItem(props: { item: ICollection }) {
 	const nav = useNavigate();
 	const { item } = props;
 	return (
