@@ -10,6 +10,7 @@
     "lint-and-fix": "npx eslint ./src --ext .ts --ext .tsx --fix && npx prettier --write ./src"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "@types/react-svg": "^5.0.0",
     "@types/sass": "^1.43.1",
     "bootstrap": "^5.1.3",

@@ -5,7 +5,7 @@ export default function CustomButton(props: {
 	type: 'button' | 'submit' | 'reset' | undefined;
 }) {
 	return (
-		<button className="custom-btn" type={props.type}>
+		<button disabled={false} className="custom-btn" type={props.type}>
 			{props.content.toUpperCase()}
 		</button>
 	);

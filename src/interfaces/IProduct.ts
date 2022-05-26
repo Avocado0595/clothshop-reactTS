@@ -3,4 +3,6 @@ export default interface IProduct {
 	name: string;
 	imageUrl: string;
 	price: number;
+	collectionId: number;
+	description: string;
 }

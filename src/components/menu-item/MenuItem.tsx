@@ -1,5 +1,4 @@
-import React from 'react';
-import { useLocation, useMatch, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ICollection from '../../interfaces/ICollection';
 import './MenuItem.scss';
 export default function MenuItem(props: { item: ICollection }) {

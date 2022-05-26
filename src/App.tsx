@@ -1,50 +1,45 @@
 import { FC, useEffect } from 'react';
-import './App.css';
-import Homepage from './pages/homepage/Homepage';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import ShopPage from './pages/shoppage/ShopPage';
-import Header from './components/header/Header';
-import SignInAndSignUp from './pages/sign-in-and-sign-up/SignInAndSignUp';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { selectUser, setCurrentUser } from './redux/user/user.slice';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { createUserProfile } from './firebase/firebase.utils';
-import { Dispatch } from 'redux';
-import { clearCurrentUser, setCurrentUser } from './redux/user/user.action';
 import IUser from './interfaces/IUser';
-import { connect } from 'react-redux';
-import { IAction } from './redux/user/user.reducer';
-import { IRootReducer } from './redux/rootReducer';
-import CartCheckout from './pages/cart-checkout/CartCheckout';
+import Header from './components/header/Header';
+import Homepage from './pages/homepage/Homepage';
+import ShopPage from './pages/shoppage/ShopPage';
+import SignInAndSignUp from './pages/sign-in-and-sign-up/SignInAndSignUp';
 import Category from './pages/collection/Collection';
+import CartCheckout from './pages/cart-checkout/CartCheckout';
+import './App.css';
+import Search from './pages/search/Search';
+import ProductDetail from './pages/product-detail/ProductDetail';
 
-const auth = getAuth();
-
-const App: FC<{
-	currentUser: IUser | null;
-	setCurrentUser: (user: IUser) => IAction;
-	clearCurrentUSer: () => IAction;
-}> = ({ currentUser, setCurrentUser }) => {
+const App: FC = () => {
+	const auth = getAuth();
+	const currentUser = useAppSelector((state) => selectUser(state));
+	const dispatch = useAppDispatch();
 	useEffect(() => {
-		const check = onAuthStateChanged(auth, async (user) => {
+		const checkOut = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				const token = await user.getIdToken();
-
-				await createUserProfile(user);
-				setCurrentUser(user as IUser);
-				localStorage.setItem('myclothToken', token);
-			} else {
-				localStorage.removeItem('myclothToken');
+				await user.getIdToken();
+				await createUserProfile(user as IUser);
+				dispatch(setCurrentUser(user as IUser));
 			}
 		});
-		return () => check();
+		return () => checkOut();
 	}, []);
 	return (
-		<div className="App">
+		<div className="App container-fluid">
 			<Header />
 			<Routes>
 				<Route index element={<Homepage />} />
 				<Route path="/shop" element={<ShopPage />} />
+				<Route path="/contact" element={<h4>Contact here!</h4>} />
 				<Route path="/:categoryName" element={<Category />} />
 				<Route path="/checkout" element={<CartCheckout />} />
+				<Route path="/search" element={<Search />} />
+				<Route path="/product/:productId" element={<ProductDetail />} />
 				<Route
 					path="/signin"
 					element={
@@ -60,11 +55,4 @@ const App: FC<{
 	);
 };
 
-const mapStateToProps = (state: IRootReducer) => ({
-	currentUser: state.user.currentUser,
-});
-const mapDispatchToProp = (dispatch: Dispatch) => ({
-	setCurrentUser: (user: IUser) => dispatch(setCurrentUser(user as IUser)),
-	clearCurrentUSer: () => dispatch(clearCurrentUser()),
-});
-export default connect(mapStateToProps, mapDispatchToProp)(App);
+export default App;

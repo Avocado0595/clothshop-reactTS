@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import IProduct from '../../../interfaces/IProduct';
-import { ICartItem } from '../../../redux/cart/cart.interface';
+import { FC } from 'react';
+import { ICartItem } from '../../../redux/cart/cart.slice';
 import './CartItem.scss';
 const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 	return (

@@ -1,15 +1,7 @@
 import { initializeApp } from 'firebase/app';
 
-import {
-	addDoc,
-	collection,
-	doc,
-	getDoc,
-	getFirestore,
-	setDoc,
-} from 'firebase/firestore';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 
-//import auth from 'firebase/auth';
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
@@ -19,6 +11,7 @@ import {
 	updateProfile,
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
+import IUser from '../interfaces/IUser';
 
 const config = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
@@ -36,32 +29,20 @@ const auth = getAuth();
 export const createUser = async (
 	account: Omit<IAccount, 'displayName'> & { displayName?: string }
 ) => {
-	try {
-		const userCredential = await createUserWithEmailAndPassword(
-			initauth,
-			account.email,
-			account.password
-		);
-		const user = userCredential.user;
-		if (account.displayName)
-			updateProfile(user, { displayName: account.displayName });
-	} catch (err) {
-		console.log(err);
-	}
+	const userCredential = await createUserWithEmailAndPassword(
+		initauth,
+		account.email,
+		account.password
+	);
+	const user = userCredential.user;
+	if (account.displayName)
+		updateProfile(user, { displayName: account.displayName });
 };
-export const ggSignOut = () =>
-	signOut(auth)
-		.then(() => {
-			localStorage.removeItem('myclothToken');
-			// Sign-out successful.
-		})
-		.catch((error) => {
-			// An error happened.
-		});
-export const createUserProfile = async (user: any) => {
+export const ggSignOut = async () => await signOut(auth);
+
+export const createUserProfile = async (user: IUser) => {
 	try {
 		const docRef = doc(db, 'users', `${user.uid}`);
-		const snapShot = await getDoc(docRef);
 		await setDoc(docRef, {
 			displayName: user.displayName,
 			email: user.email,

@@ -1,14 +1,13 @@
 import { FC } from 'react';
 import ErrorAlert from '../../../components/error-badge/ErrorAlert';
 import './Input.scss';
-const Input:FC< {
+const Input: FC<{
 	label: string;
 	name: string;
 	type: string;
 	required?: boolean;
 	errMessage?: string;
 }> = ({ name, type, required, label, errMessage }) => {
-
 	return (
 		<div className="form-group">
 			<input
@@ -25,6 +24,6 @@ const Input:FC< {
 			{errMessage ? <ErrorAlert message={errMessage} /> : null}
 		</div>
 	);
-}
+};
 
 export default Input;

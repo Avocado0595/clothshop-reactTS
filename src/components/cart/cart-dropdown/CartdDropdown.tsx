@@ -1,23 +1,16 @@
 import { FC } from 'react';
-import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import IProduct from '../../../interfaces/IProduct';
-import { IRootReducer } from '../../../redux/rootReducer';
 import CartItem from '../cart-item/CartItem';
 import './CartDropdown.scss';
 import { useNavigate } from 'react-router-dom';
-import { ICartItem } from '../../../redux/cart/cart.interface';
-import { selectCartItemList } from '../../../redux/cart/cart.selector';
-import { Dispatch } from 'redux';
-import { toggleCart } from '../../../redux/cart/cart.action';
+import { toggleCart } from '../../../redux/cart/cart.slice';
 import cartEmpty from '../../../asserts/empty-cart.png';
-const CartdDropdown: FC<{ itemList: Array<ICartItem>; dispatch: Dispatch }> = ({
-	itemList,
-	dispatch,
-}) => {
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+const CartdDropdown: FC = () => {
+	const itemList = useAppSelector((state) => state.cart.itemList);
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const handleCheckout = () => {
-		dispatch(toggleCart()); //shorthand for dispatch
+		dispatch(toggleCart());
 		navigate('/checkout');
 	};
 	return (
@@ -41,10 +34,4 @@ const CartdDropdown: FC<{ itemList: Array<ICartItem>; dispatch: Dispatch }> = ({
 	);
 };
 
-const mapStateToProps = (state: IRootReducer) => ({
-	itemList: selectCartItemList(state),
-});
-// const mapDispatchToProp = (dispatch: Dispatch)=>({
-// 	toggleCart: ()=>dispatch(toggleCart())
-// })
-export default connect(mapStateToProps)(CartdDropdown);
+export default CartdDropdown;

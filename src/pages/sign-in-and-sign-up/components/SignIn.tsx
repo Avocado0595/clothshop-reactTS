@@ -11,9 +11,10 @@ import { Col } from 'reactstrap';
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
+
 	const handleSubmit = async (e: React.SyntheticEvent) => {
-		setIsLoadingState(true);
 		e.preventDefault();
+		setIsLoadingState(true);
 		const target = e.target as typeof e.target & {
 			email: { value: string };
 			password: { value: string };
@@ -40,9 +41,12 @@ export default function SignIn() {
 					<Loading />
 				</div>
 			) : null}
-			<h2>I already have an account</h2>
-			<span>Sign in with your email and password</span>
-			<form onSubmit={handleSubmit} onChange={()=>setErrMessage(undefined)}>
+			<h2>If you already had an account</h2>
+			<span>Sign in with your email and password here.</span>
+			<form
+				onSubmit={handleSubmit}
+				onChange={() => setErrMessage(undefined)}
+			>
 				<Input
 					label="Email"
 					type="email"

@@ -1,20 +1,77 @@
+$background-color: #f7f5f2;
 .header {
-	padding: 16px 32px 8px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 20px;
-	.header-logo {
-		display: block;
+	height: auto;
+	.navbar {
+		width: 100%;
+		border-bottom: 1px rgb(168, 168, 168);
+		background-color: $background-color;
+		padding: 16px 32px 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 20px;
 	}
-	.header-menu {
-		.header-item {
-			text-decoration: none;
-			color: black;
-			margin: 0 8px;
+}
+.header-link {
+	text-decoration: none;
+	position: relative;
+	bottom: 0px;
+	width: 300px;
+	height: 35px;
+	.header-logo {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		div {
+			svg {
+				width: 48px;
+			}
 		}
-		a:hover {
-			cursor: pointer;
+	}
+	h1 {
+		color: black;
+		font-size: 28px;
+		font-weight: 800;
+		position: absolute;
+		right: 0px;
+		bottom: -12px;
+	}
+}
+.header-menu {
+	display: flex;
+	align-items: center;
+
+	.header-item {
+		text-decoration: none;
+		color: black;
+		margin: 0 8px;
+		.avatar-icon {
+			width: 30px;
+			margin-right: 8px;
+		}
+	}
+	a:hover {
+		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.header {
+		.header-menu {
+			.input-group {
+				// reponsive here
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.header {
+		.header-link {
+			width: 50px;
+			h1 {
+				display: none;
+			}
 		}
 	}
 }
