@@ -35,6 +35,7 @@
     "@types/reactstrap": "^8.7.2",
     "@types/redux": "^3.6.0",
     "@types/redux-logger": "^3.0.9",
+    "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "@vitejs/plugin-react": "^1.0.7",

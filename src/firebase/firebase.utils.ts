@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where, writeBatch } from 'firebase/firestore';
 
 import {
 	createUserWithEmailAndPassword,
@@ -12,6 +12,8 @@ import {
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
 import IUser from '../interfaces/IUser';
+import ICollection from '../interfaces/ICollection';
+import IProduct from '../interfaces/IProduct';
 
 const config = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
@@ -25,6 +27,7 @@ const config = {
 const app = initializeApp(config);
 const initauth = getAuth(app);
 const auth = getAuth();
+export const db = getFirestore(app);
 
 export const createUser = async (
 	account: Omit<IAccount, 'displayName'> & { displayName?: string }
@@ -38,20 +41,43 @@ export const createUser = async (
 	if (account.displayName)
 		updateProfile(user, { displayName: account.displayName });
 };
+
+
 export const ggSignOut = async () => await signOut(auth);
+
 
 export const createUserProfile = async (user: IUser) => {
 	try {
-		const docRef = doc(db, 'users', `${user.uid}`);
-		await setDoc(docRef, {
+		const userRef = doc(db,`users/${user.uid}`);
+		const userSnapShot = await getDoc(userRef);
+		if(!userSnapShot.exists())
+		await setDoc(userRef, {
 			displayName: user.displayName,
 			email: user.email,
+			createdAt: new Date()
 		});
 	} catch (e) {
 		console.error('Error adding document: ', e);
 	}
 };
-export const setPersistenceFirebase = setPersistence(
+
+
+export const getCollections = async ()=>{
+	const q = query(collection(db, "collections"));
+	const querySnapshot = await getDocs(q);
+	return querySnapshot.docs.map((doc:any) => {
+		return doc.data() as ICollection
+	});
+}
+export const getProducts = async ()=>{
+	const q = query(collection(db, "products"));
+	const querySnapshot = await getDocs(q);
+	return querySnapshot.docs.map((doc:any) => {
+		return doc.data() as IProduct
+	});
+}
+
+export const setPersistenceFirebase =()=>{ setPersistence(
 	auth,
 	browserSessionPersistence
 )
@@ -61,6 +87,6 @@ export const setPersistenceFirebase = setPersistence(
 	.catch((error) => {
 		console.log(error);
 	});
-export const db = getFirestore(app);
+}
 
 export default initauth;

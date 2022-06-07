@@ -20,52 +20,60 @@ const CartCheckout: FC = () => {
 			<div>
 				<h3>Checkout</h3>
 				<table>
-					<tr>
-						<th>Product</th>
-						<th>Name</th>
-						<th>Quantity</th>
-						<th>Price</th>
-						<th>Remove</th>
-					</tr>
-					{cartList.map((item) => (
+					<thead>
 						<tr>
-							<td>
-								<img
-									alt="product image"
-									className="product-img"
-									src={item.imageUrl}
-								/>
-							</td>
-							<td>{item.name}</td>
-							<td>
-								<div className="quantity-column">
-									<button
-										className="quantity-btn inc"
-										onClick={() => dispatch(addItem(item))}
-									>
-										+
-									</button>
-									<p>{item.quantity}</p>
-									<button
-										onClick={() =>
-											dispatch(removeItem(item))
-										}
-										className="quantity-btn dec"
-									>
-										-
-									</button>
-								</div>
-							</td>
-							<td>{item.price * item.quantity}$</td>
-							<td>
-								<ReactSVG
-									className="icon-trash"
-									src={trashIcon}
-									onClick={() => dispatch(deleteItem(item))}
-								/>
-							</td>
+							<th>Product</th>
+							<th>Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Remove</th>
 						</tr>
-					))}
+					</thead>
+					<tbody>
+						{cartList.map((item, i) => (
+							<tr key={i}>
+								<td>
+									<img
+										alt="product image"
+										className="product-img"
+										src={item.imageUrl}
+									/>
+								</td>
+								<td>{item.name}</td>
+								<td>
+									<div className="quantity-column">
+										<button
+											className="quantity-btn inc"
+											onClick={() =>
+												dispatch(addItem(item))
+											}
+										>
+											+
+										</button>
+										<p>{item.quantity}</p>
+										<button
+											onClick={() =>
+												dispatch(removeItem(item))
+											}
+											className="quantity-btn dec"
+										>
+											-
+										</button>
+									</div>
+								</td>
+								<td>{item.price * item.quantity}$</td>
+								<td>
+									<ReactSVG
+										className="icon-trash"
+										src={trashIcon}
+										onClick={() =>
+											dispatch(deleteItem(item))
+										}
+									/>
+								</td>
+							</tr>
+						))}
+					</tbody>
 				</table>
 				<h3>TOTAL: {totalPrice}$</h3>
 			</div>

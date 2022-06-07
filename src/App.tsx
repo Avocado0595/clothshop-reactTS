@@ -1,9 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { selectUser, setCurrentUser } from './redux/user/user.slice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { createUserProfile } from './firebase/firebase.utils';
+import { createUserProfile, getCollections, getProducts, setPersistenceFirebase } from './firebase/firebase.utils';
 import IUser from './interfaces/IUser';
 import Header from './components/header/Header';
 import Homepage from './pages/homepage/Homepage';
@@ -14,12 +14,30 @@ import CartCheckout from './pages/cart-checkout/CartCheckout';
 import './App.css';
 import Search from './pages/search/Search';
 import ProductDetail from './pages/product-detail/ProductDetail';
-
+import firestore from 'firebase/firestore';
+import { getCollectionFromApi } from './redux/collection/collection.slice';
+import { getProductFromApi } from './redux/product/product.slice';
+import LoadingPage from './pages/loading-page/LoadingPage';
+import { fetchProduct } from './fetch-data/product.fetch';
 const App: FC = () => {
 	const auth = getAuth();
 	const currentUser = useAppSelector((state) => selectUser(state));
 	const dispatch = useAppDispatch();
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	useEffect(() => {
+		// fetch('https://firestore.googleapis.com/v1/projects/clothshop-b6cc2/databases/(default)/documents/collections')
+		// .then(res=>res.json())
+		// .then(data=>console.log(data));
+		dispatch(fetchProduct());
+		const data = async ()=> {
+			setIsLoading(true);
+			setPersistenceFirebase();
+			const collections = await getCollections();
+			//const products = await getProducts();
+			dispatch(getCollectionFromApi(collections));
+			
+			setIsLoading(false);
+		}
 		const checkOut = onAuthStateChanged(auth, async (user) => {
 			if (user) {
 				await user.getIdToken();
@@ -27,8 +45,12 @@ const App: FC = () => {
 				dispatch(setCurrentUser(user as IUser));
 			}
 		});
-		return () => checkOut();
+		data();
+		return () => checkOut(); //componentWillUnMount()
 	}, []);
+	if(isLoading)
+		return (<LoadingPage/>)
+	else
 	return (
 		<div className="App container-fluid">
 			<Header />

@@ -6,7 +6,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectListProductName } from '../../redux/product/product.slice';
 import './SearchInput.scss';
 const SearchInput: FC = () => {
-	const [value, setValue] = useState<string>();
+	const [value, setValue] = useState<string>('');
 	const [resultList, setResultList] = useState<
 		Array<{ id: number; name: string }>
 	>([]);
@@ -49,8 +49,8 @@ const SearchInput: FC = () => {
 			/>
 			{resultList.length != 0 ? (
 				<div className="search-dropdown">
-					{resultList.map((i) => (
-						<a href={`/product/${i.id}`}>{i.name}</a>
+					{resultList.map((i, idx) => (
+						<a key={idx} href={`/product/${i.id}`}>{i.name}</a>
 					))}
 				</div>
 			) : null}

@@ -42,7 +42,7 @@ const Header: FC = () => {
 
 					{!currentUser ? (
 						<Link className="header-item" to="/signin">
-							<a className="header-item">SIGN IN</a>
+							<div className="header-item">SIGN IN</div>
 						</Link>
 					) : (
 						<a className="header-item" onClick={handleSignOut}>
