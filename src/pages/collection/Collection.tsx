@@ -1,21 +1,23 @@
 import { FC } from 'react';
-import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
-import ICollection from '../../interfaces/ICollection';
-import { selectDirectorySection } from '../../redux/directory/directory.selector';
+import { selectCollection } from '../../redux/collection/collection.slice';
+import { useAppSelector } from '../../redux/hooks';
 
-const Category: FC<{ categoryList: ICollection[] }> = ({ categoryList }) => {
+const Category: FC = () => {
 	const { categoryName } = useParams();
-	const category = categoryList.filter(
+	const collectionList = useAppSelector((state) => selectCollection(state));
+	const collection = collectionList.filter(
 		(i) => i.title.toLowerCase() === categoryName
 	)[0];
-	return (
-		<PreviewCollection title={category.title} itemList={category.items} />
-	);
+	if (collection)
+		return (
+			<PreviewCollection
+				title={collection.title}
+				collectionId={collection.id}
+			/>
+		);
+	else return <h3>Not Found Collection!</h3>;
 };
-const mapStateToProps = createStructuredSelector({
-	categoryList: selectDirectorySection,
-});
-export default connect(mapStateToProps)(Category);
+
+export default Category;

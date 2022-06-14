@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
-import { persistStore } from 'redux-persist';
-const middlewares = [logger];
+export const store = configureStore({
+	reducer: rootReducer,
+});
 
-export const store = createStore(rootReducer, applyMiddleware(...middlewares));
-export const persistor = persistStore(store);
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

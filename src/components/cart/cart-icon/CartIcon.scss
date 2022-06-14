@@ -1,20 +1,32 @@
 .cart {
-	user-select: none;
+	
 	display: inline-block;
 	position: relative;
 	top: -3px;
-	.cart-icon {
-		width: 32px;
-	}
-	.cart-count {
-		width: 100%;
-		height: 18px;
-		border-radius: 50%;
-		color: black;
-		position: absolute;
-		// left: 8px;
-		top: 12px;
-		font-size: 12px;
-		text-align: center;
+	
+	
+}
+.dropdown{
+	user-select: none;
+	.btn, .btn:focus, .btn:hover, .btn:active{
+		background-color: unset;
+		border-color: unset;
+		outline: none;
+		box-shadow: unset;
+		position: relative;
+		transform: unset;
+		.cart-count {
+			height: 18px;
+			border-radius: 50%;
+			color: black;
+			position: absolute;
+			top: 41%;
+			left: 44%;
+			font-size: 13px;
+			text-align: center;
+		}
+		.cart-icon {
+			width: 34px;
+		}
 	}
 }

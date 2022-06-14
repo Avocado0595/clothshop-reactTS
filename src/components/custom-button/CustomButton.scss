@@ -8,6 +8,7 @@ $subcolor: white;
 	border: solid 1px $maincolor;
 	color: $subcolor;
 	width: 200px;
+	min-width: 150px;
 	height: 60px;
 	&:hover {
 		background-color: $subcolor;

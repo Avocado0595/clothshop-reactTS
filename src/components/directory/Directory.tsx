@@ -1,23 +1,28 @@
-import { FC } from 'react';
-import ICollection from '../../interfaces/ICollection';
+import { FC, useEffect } from 'react';
 import MenuItem from '../menu-item/MenuItem';
 import './Directory.scss';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectDirectorySection } from '../../redux/directory/directory.selector';
+import { useAppSelector } from '../../redux/hooks';
+import { selectCollection } from '../../redux/collection/collection.slice';
+import { addCollection, addProduct, getCollections } from '../../firebase/firebase.utils';
+import { selectProduct } from '../../redux/product/product.slice';
 
-const Directory: FC<{ categoryList: Array<ICollection> }> = ({
-	categoryList,
-}) => {
+
+const Directory: FC = () => {
+	const collectionList = useAppSelector((state) => selectCollection(state));
+	// const productList = useAppSelector(state=>selectProduct(state));
+	useEffect(()=>{
+		const a = async ()=> await getCollections();
+	//	const b = async ()=> await addProduct(productList);
+		a();
+		//b();
+	})
 	return (
 		<div className="directory-menu">
-			{categoryList.map((item) => (
+			{collectionList.map((item) => (
 				<MenuItem key={item.id} item={item} />
 			))}
 		</div>
 	);
 };
-const mapStateToProps = createStructuredSelector({
-	categoryList: selectDirectorySection,
-});
-export default connect(mapStateToProps)(Directory);
+
+export default Directory;

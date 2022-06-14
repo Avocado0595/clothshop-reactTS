@@ -1,84 +1,124 @@
-import { FC } from 'react';
-import { connect } from 'react-redux';
+import { FC, useState } from 'react';
 import { ReactSVG } from 'react-svg';
-import { Dispatch } from 'redux';
-import IProduct from '../../interfaces/IProduct';
-import { addItem, reduceItem, deleteItem } from '../../redux/cart/cart.action';
-import { ICartAction, ICartItem } from '../../redux/cart/cart.interface';
-import { selectTotalPrice } from '../../redux/cart/cart.selector';
-import { IRootReducer } from '../../redux/rootReducer';
-import leftIcon from '../../asserts/caret-left.svg';
-import rightIcon from '../../asserts/caret-right.svg';
+import {
+	addItem,
+	clearCart,
+	deleteItem,
+	removeItem,
+	selectCartList,
+	selectTotalPrice,
+} from '../../redux/cart/cart.slice';
 import trashIcon from '../../asserts/trash.svg';
 import './CartCheckout.scss';
-const CartCheckout: FC<{
-	cartList: Array<ICartItem>;
-	cartTotalPrice: number;
-	addItem: (item: IProduct) => ICartAction;
-	reduceItem: (item: IProduct) => ICartAction;
-	deleteItem: (item: IProduct) => ICartAction;
-}> = ({ cartList, cartTotalPrice, addItem, reduceItem, deleteItem }) => {
-	return (
-		<div>
-			<h3>Checkout</h3>
-			<table>
-				<tr>
-					<th>Product</th>
-					<th>Name</th>
-					<th>Quantity</th>
-					<th>Price</th>
-					<th>Remove</th>
-				</tr>
-				{cartList.map((item) => (
-					<tr>
-						<td>
-							<img
-								alt="product image"
-								className="product-img"
-								src={item.imageUrl}
-							/>
-						</td>
-						<td>{item.name}</td>
-						<td>
-							<div className="quantity-column">
-								<button
-									className="quantity-btn inc"
-									onClick={() => addItem(item)}
-								>
-									+
-								</button>
-								<p>{item.quantity}</p>
-								<button
-									onClick={() => reduceItem(item)}
-									className="quantity-btn dec"
-								>
-									-
-								</button>
-							</div>
-						</td>
-						<td>{item.price * item.quantity}$</td>
-						<td>
-							<ReactSVG
-								className="icon-trash"
-								src={trashIcon}
-								onClick={() => deleteItem(item)}
-							/>
-						</td>
-					</tr>
-				))}
-			</table>
-			<h3>TOTAL: {cartTotalPrice}$</h3>
-		</div>
-	);
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectUser } from '../../redux/user/user.slice';
+import { useNavigate } from 'react-router-dom';
+import { createUserCart } from '../../firebase/firebase.utils';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+
+const CartCheckout: FC = () => {
+	const cartList = useAppSelector((state) => selectCartList(state));
+	const totalPrice = useAppSelector((state) => selectTotalPrice(state));
+	const user = useAppSelector((state)=>selectUser(state));
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	//modal
+	const [modalState, setModalState] = useState({modal: false});
+	const toggle = ()=>setModalState({modal: !modalState.modal});
+	const commitCheckout = ()=>{
+		modalState.modal?dispatch(clearCart()):null;
+	}
+	const handleCheckout = async()=>{
+		if(!user){
+			navigate('/signin');
+		}
+		else{
+			await createUserCart(user.uid, cartList.map((c)=>({id: c.id, name: c.name, price: c.price, quantity:c.quantity})))
+			toggle();
+		}
+	}
+	if (cartList.length !== 0)
+		return (
+			<div>
+				<h3>Checkout</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						{cartList.map((item, i) => (
+							<tr key={i}>
+								<td>
+									<img
+										alt="product image"
+										className="product-img"
+										src={item.imageUrl}
+									/>
+								</td>
+								<td>{item.name}</td>
+								<td>
+									<div className="quantity-column">
+										<button
+											className="quantity-btn inc"
+											onClick={() =>
+												dispatch(addItem(item))
+											}
+										>
+											+
+										</button>
+										<p>{item.quantity}</p>
+										<button
+											onClick={() =>
+												dispatch(removeItem(item))
+											}
+											className="quantity-btn dec"
+										>
+											-
+										</button>
+									</div>
+								</td>
+								<td>{item.price * item.quantity}$</td>
+								<td>
+									<ReactSVG
+										className="icon-trash"
+										src={trashIcon}
+										onClick={() =>
+											dispatch(deleteItem(item))
+										}
+									/>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<h3>TOTAL: {totalPrice}$</h3>
+				<button onClick={handleCheckout}>CHECK OUT HERE</button>
+				<Modal isOpen={modalState.modal} toggle={toggle} >
+          <ModalHeader toggle={toggle}>Checkout done.</ModalHeader>
+          <ModalBody>
+            Yayy! Your cart is waiting for ship.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={commitCheckout}>I got it!</Button>{' '}
+          </ModalFooter>
+        </Modal>
+
+			</div>
+		);
+	else
+		return (
+			<h5>
+				You have nothing in your cart. Go <a href="/shop">Shop page</a>{' '}
+				to get some!
+			</h5>
+		);
 };
 
-const mapStateToProps = (state: IRootReducer) => ({
-	cartList: state.cart.itemList,
-	cartTotalPrice: selectTotalPrice(state),
-});
-const mapDispatchToProp = (dispatch: Dispatch) => ({
-	addItem: (item: IProduct) => dispatch(addItem(item)),
-	reduceItem: (item: IProduct) => dispatch(reduceItem(item)),
-	deleteItem: (item: IProduct) => dispatch(deleteItem(item)),
-});
-export default connect(mapStateToProps, mapDispatchToProp)(CartCheckout);
+export default CartCheckout;

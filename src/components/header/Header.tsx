@@ -4,58 +4,56 @@ import Logo from '../../asserts/crown.svg';
 import { ggSignOut } from '../../firebase/firebase.utils';
 import { FC } from 'react';
 import { ReactSVG } from 'react-svg';
-import { connect } from 'react-redux';
-import { IRootReducer } from '../../redux/rootReducer';
-import IUser from '../../interfaces/IUser';
-import { clearCurrentUser } from '../../redux/user/user.action';
-import { Dispatch } from 'redux';
-import { IAction } from '../../redux/user/user.reducer';
-import CartdDropdown from '../cart/cart-dropdown/CartdDropdown';
+import { clearCurrentUser, selectUser } from '../../redux/user/user.slice';
 import CartIcon from '../cart/cart-icon/CartIcon';
-import { selectToggleCart } from '../../redux/cart/cart.selector';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { Navbar } from 'reactstrap';
+import userAva from '../../asserts/user.png';
+import SearchInput from '../search-input/SearchInput';
 
-const Header: FC<{
-	currentUser: IUser | null;
-	clearCurrentUser: () => IAction;
-	toggleCart: boolean;
-}> = ({ currentUser, clearCurrentUser, toggleCart }) => {
+const Header: FC = () => {
+	const currentUser = useAppSelector((state) => selectUser(state));
+
+	const dispatch = useAppDispatch();
 	const handleSignOut = async () => {
 		await ggSignOut();
-		clearCurrentUser();
+		dispatch(clearCurrentUser());
 	};
 	return (
-		<div className="header">
-			<Link to="/" className="header-link">
-				<ReactSVG src={Logo} />
-			</Link>
-			<div className="header-menu">
-				<Link className="header-item" to="/shop">
-					SHOP
+		<header className="header">
+			<Navbar fixed="top">
+				<Link to="/" className="header-link">
+					<ReactSVG className="header-logo" src={Logo} />
+					<h1>MY CLOTH SHOP</h1>
 				</Link>
-				<Link className="header-item" to="/contact">
-					CONTACT
-				</Link>
-				{!currentUser ? (
-					<Link className="header-item" to="/signin">
-						SIGN IN
+
+				<div className="header-menu">
+					<Link className="header-item " to="/shop">
+						SHOP
 					</Link>
-				) : (
-					<a className="header-item" onClick={handleSignOut}>
-						SIGN OUT
-					</a>
-				)}
-				<CartIcon />
-			</div>
-			{toggleCart ? null : <CartdDropdown />}
-		</div>
+					<Link className="header-item" to="/contact">
+						CONTACT
+					</Link>
+					<SearchInput />
+
+					{!currentUser ? (
+						<Link className="header-item" to="/signin">
+							<div className="header-item">SIGN IN</div>
+						</Link>
+					) : (
+						<a className="header-item" onClick={handleSignOut}>
+							<img
+								className="avatar-icon"
+								src={currentUser.photoURL || userAva}
+							/>
+							SIGN OUT
+						</a>
+					)}
+					<CartIcon />
+				</div>
+			</Navbar>
+		</header>
 	);
 };
 
-const mapStateToProps = (state: IRootReducer) => ({
-	currentUser: state.user.currentUser,
-	toggleCart: selectToggleCart(state),
-});
-const mapDispatchToProp = (dispatch: Dispatch) => ({
-	clearCurrentUser: () => dispatch(clearCurrentUser()),
-});
-export default connect(mapStateToProps, mapDispatchToProp)(Header);
+export default Header;

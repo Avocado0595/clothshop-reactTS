@@ -1,0 +1,31 @@
+.product-detail {
+	display: flex;
+	.product-img {
+		flex: 1;
+	}
+	.product-info {
+		flex: 2;
+		padding: 32px;
+		text-align: left;
+		.product-name {
+			font-weight: 900;
+		}
+		.product-addcart {
+			user-select: none;
+			border: 1px solid #333;
+			width: fit-content;
+			padding: 16px 32px;
+			border-radius: 5px;
+			cursor: pointer;
+			&:hover {
+				background: black;
+				p {
+					color: white;
+				}
+			}
+			p {
+				margin: auto;
+			}
+		}
+	}
+}

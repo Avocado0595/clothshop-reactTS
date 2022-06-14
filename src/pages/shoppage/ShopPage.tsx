@@ -1,26 +1,22 @@
-import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { FC } from 'react';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
 
-import ICollection from '../../interfaces/ICollection';
-import { selectDirectorySection } from '../../redux/directory/directory.selector';
-const ShopPage: FC<{ collection: Array<ICollection> }> = ({ collection }) => {
+import { selectCollection } from '../../redux/collection/collection.slice';
+import { useAppSelector } from '../../redux/hooks';
+const ShopPage: FC = () => {
+	const collectionList = useAppSelector((state) => selectCollection(state));
 	return (
 		<div>
-			SHOP_PAGE
-			{collection.map((item) => (
+			<h3>COLLECTIONS</h3>
+			{collectionList.map((item) => (
 				<PreviewCollection
 					key={item.id}
 					title={item.title}
-					itemList={item.items}
+					collectionId={item.id}
 				/>
 			))}
 		</div>
 	);
 };
 
-const mapStateToProps = createStructuredSelector({
-	collection: selectDirectorySection,
-});
-export default connect(mapStateToProps)(ShopPage);
+export default ShopPage;
