@@ -1,19 +1,29 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import './CartIcon.scss';
 import cartIcon from '../../../asserts/shopping-cart.png';
-import { selectCartList, toggleCart } from '../../../redux/cart/cart.slice';
+import { selectCartList } from '../../../redux/cart/cart.slice';
 
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from '../../../redux/hooks';
+import { Dropdown, DropdownToggle} from 'reactstrap';
+
+import CartMenu from '../cart-dropdown/CartMenu';
 const CartIcon: FC = () => {
+	const [dropState, setDropDownState]= useState({dropdownOpen:false})
 	const numberOfItem = useAppSelector(
 		(state) => selectCartList(state).length
 	);
-	const dispatch = useAppDispatch();
+	const toggle = ()=> {
+		setDropDownState(prevState => ({dropdownOpen: !prevState.dropdownOpen}))
+	};
+
 	return (
-		<a onClick={() => dispatch(toggleCart())} className="header-item cart">
+		<Dropdown isOpen={dropState.dropdownOpen} toggle={toggle}>
+        <DropdownToggle>
 			<div className="cart-count">{numberOfItem}</div>
 			<img alt="cart" className="cart-icon" src={cartIcon} />
-		</a>
+        </DropdownToggle>
+		<CartMenu/>
+      </Dropdown>
 	);
 };
 

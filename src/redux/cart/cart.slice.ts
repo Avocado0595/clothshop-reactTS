@@ -6,18 +6,17 @@ export interface ICartItem extends IProduct {
 	quantity: number;
 }
 interface CartState {
-	hidden: boolean;
 	itemList: ICartItem[];
 }
 
-const initialState: CartState = { hidden: true, itemList: [] };
+const initialState: CartState = {itemList: [] };
 
 export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		toggleCart: (state) => {
-			state.hidden = !state.hidden;
+		clearCart:(state)=>{
+			state.itemList = [];
 		},
 		addItem: (state, action: PayloadAction<ICartItem>) => {
 			const oldList = [...state.itemList];
@@ -53,11 +52,10 @@ export const cartSlice = createSlice({
 	},
 });
 
-export const { toggleCart, addItem, removeItem, deleteItem } =
+export const {  addItem, removeItem, deleteItem, clearCart } =
 	cartSlice.actions;
 
 export const selectCartList = (state: RootState) => state.cart.itemList;
-export const selectCartToggle = (state: RootState) => state.cart.hidden;
 export const selectTotalPrice = (state: RootState) =>
 	state.cart.itemList.reduce(
 		(total, item) => total + item.quantity * item.price,

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
+
 import { selectCollection } from '../../redux/collection/collection.slice';
 import { useAppSelector } from '../../redux/hooks';
 const ShopPage: FC = () => {

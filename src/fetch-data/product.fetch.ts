@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { collection } from "firebase/firestore";
 import IProduct from "../interfaces/IProduct";
 
 export const fetchProduct = createAsyncThunk(
@@ -18,10 +17,10 @@ export const fetchProduct = createAsyncThunk(
       if (response.status < 200 || response.status >= 300) {
         return rejectWithValue(jsonData);
       }
-      const a:IProduct[] = jsonData.documents.map((i:any)=>({id:parseInt(i.fields.id.integerValue), collectionId: parseInt(i.fields.collectionId.integerValue),
+      const a:IProduct[] = jsonData.documents.map((i:any)=>({
+        id:parseInt(i.fields.id.integerValue), collectionId: parseInt(i.fields.collectionId.integerValue),
         name: i.fields.name.stringValue, imageUrl: i.fields.imageUrl.stringValue,price: parseInt(i.fields.id.integerValue)
     }));
-  
       // Còn không thì trả về dữ liệu
       return a;
     }

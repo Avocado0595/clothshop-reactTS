@@ -29,3 +29,5 @@
    - function(){}: nextFunction()=> thực thi khi inAuthStateChanged dc gọi
    - lưu ý ở hook useEffect có return hàm này là để hủy connect đến firebase khi component này mất đi.
 5. get api -> get ở layout component => không cần thiết => redux-thunk (dĩ nhiên là ko gọi trong reducer dc vì get api là async, còn reducer chỉ nhận pure function)
+6. chỉnh sửa việc gọi api product tại route cần load, ko gọi những nơi không cần @@ mà cái này cần gọi hết
+7. 

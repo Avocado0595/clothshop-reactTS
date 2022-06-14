@@ -32,7 +32,6 @@ export const productSlice = createSlice({
 		// Tắt trạng thái loading, lưu thông tin user vào store
 		state.isLoading = false;
 		state.productList = action.payload as IProduct[];
-		console.log(state.productList)
 		});
 	
 		// Khi thực hiện action login thất bại (Promise rejected)
@@ -49,10 +48,14 @@ export const { getProduct, getProductFromApi } = productSlice.actions;
 export const selectProduct = (state: RootState) => state.product.productList;
 export const selectByProductId = (state: RootState, id: number) =>
 	state.product.productList.filter((p) => p.id === id)[0];
+
+export const selectByCollection = (state: RootState, id: number) =>
+state.product.productList.filter((p) => p.collectionId === id);
+
 export const selectSearchProduct = (state: RootState, p: string) =>
 	state.product.productList.filter((i) =>
-		i.name.toLowerCase().includes(p.toLowerCase())
-	);
+		i.name.toLowerCase().includes(p.toLowerCase()));
+
 export const selectListProductName = (state: RootState) =>
 	state.product.productList.map((i) => ({ name: i.name, id: i.id }));
 

@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import {
 	addItem,
+	clearCart,
 	deleteItem,
 	removeItem,
 	selectCartList,
@@ -10,11 +11,33 @@ import {
 import trashIcon from '../../asserts/trash.svg';
 import './CartCheckout.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectUser } from '../../redux/user/user.slice';
+import { useNavigate } from 'react-router-dom';
+import { createUserCart } from '../../firebase/firebase.utils';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const CartCheckout: FC = () => {
 	const cartList = useAppSelector((state) => selectCartList(state));
 	const totalPrice = useAppSelector((state) => selectTotalPrice(state));
+	const user = useAppSelector((state)=>selectUser(state));
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	//modal
+	const [modalState, setModalState] = useState({modal: false});
+	const toggle = ()=>setModalState({modal: !modalState.modal});
+	const commitCheckout = ()=>{
+		modalState.modal?dispatch(clearCart()):null;
+	}
+	const handleCheckout = async()=>{
+		if(!user){
+			navigate('/signin');
+		}
+		else{
+			await createUserCart(user.uid, cartList.map((c)=>({id: c.id, name: c.name, price: c.price, quantity:c.quantity})))
+			toggle();
+		}
+	}
 	if (cartList.length !== 0)
 		return (
 			<div>
@@ -76,6 +99,17 @@ const CartCheckout: FC = () => {
 					</tbody>
 				</table>
 				<h3>TOTAL: {totalPrice}$</h3>
+				<button onClick={handleCheckout}>CHECK OUT HERE</button>
+				<Modal isOpen={modalState.modal} toggle={toggle} >
+          <ModalHeader toggle={toggle}>Checkout done.</ModalHeader>
+          <ModalBody>
+            Yayy! Your cart is waiting for ship.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={commitCheckout}>I got it!</Button>{' '}
+          </ModalFooter>
+        </Modal>
+
 			</div>
 		);
 	else

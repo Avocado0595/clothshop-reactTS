@@ -61,6 +61,18 @@ export const createUserProfile = async (user: IUser) => {
 	}
 };
 
+export const createUserCart = async(userUid: string, cartList: {id: number, name: string, price: number, quantity:number}[])=>{
+	try{
+		const userCartRef = doc(collection(db, `userCart`));
+		await setDoc(userCartRef,{
+			userUid: userUid,
+			productList: [...cartList]
+		});
+	}
+	catch(e){
+		console.error('Error adding cart: ', e);
+	}
+}
 
 export const getCollections = async ()=>{
 	const q = query(collection(db, "collections"));

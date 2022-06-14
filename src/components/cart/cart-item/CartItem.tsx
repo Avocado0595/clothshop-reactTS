@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import { DropdownItem } from 'reactstrap';
 import { ICartItem } from '../../../redux/cart/cart.slice';
 import './CartItem.scss';
 const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 	return (
-		<div className="cart-item-layout" key={item.id}>
+		<DropdownItem key={item.id}>
 			<img
 				alt="item image"
 				className="cart-item-img"
@@ -15,7 +16,7 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 					{item.quantity} &times; {item.price}$
 				</p>
 			</div>
-		</div>
+		</DropdownItem>
 	);
 };
 

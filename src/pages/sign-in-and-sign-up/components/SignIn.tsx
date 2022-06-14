@@ -7,11 +7,12 @@ import './SignIn.scss';
 import initauth from '../../../firebase/firebase.utils';
 import Loading from '../../../components/loading-icon/Loading';
 import { Col } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
-
+	const navigate = useNavigate();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		setIsLoadingState(true);
@@ -31,6 +32,7 @@ export default function SignIn() {
 				setErrMessage({ password: 'Wrong password.' });
 			}
 		}
+		navigate(-1);
 		setIsLoadingState(false);
 	};
 

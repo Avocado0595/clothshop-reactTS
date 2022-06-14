@@ -1,18 +1,14 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Container, Row } from 'reactstrap';
-import { fetchProduct } from '../../fetch-data/product.fetch';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../redux/hooks';
+import { selectByCollection } from '../../redux/product/product.slice';
 import PreviewItem from '../preview-item/PreviewItem';
 import './PreviewCollection.scss';
 const PreviewCollection: FC<{
 	title: string;
 	collectionId: number;
 }> = ({ title, collectionId }) => {
-	
-	const productList = useAppSelector((state) =>
-		state.product.productList.filter((p) => p.collectionId === collectionId)
-	);
-	
+	const productList = useAppSelector((state) =>selectByCollection(state, collectionId));
 	return (
 		<Container className="collection-preview">
 			<h2 className="title">{title.toUpperCase()}</h2>

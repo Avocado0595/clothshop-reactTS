@@ -1,10 +1,13 @@
-.cart-item-layout {
-	display: flex;
+.dropdown-item {
+	&:active{
+		background-color: #e9ecef !important;
+	}
+	display: flex !important;
 	flex-direction: row;
+	white-space: unset !important;
 	.cart-item-img {
 		width: 60px;
 	}
-	padding: 8px;
 	.cart-item-info {
 		margin-left: 16px;
 		p {

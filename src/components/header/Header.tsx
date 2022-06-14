@@ -5,19 +5,15 @@ import { ggSignOut } from '../../firebase/firebase.utils';
 import { FC } from 'react';
 import { ReactSVG } from 'react-svg';
 import { clearCurrentUser, selectUser } from '../../redux/user/user.slice';
-
-import CartdDropdown from '../cart/cart-dropdown/CartdDropdown';
 import CartIcon from '../cart/cart-icon/CartIcon';
-
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectCartToggle } from '../../redux/cart/cart.slice';
 import { Navbar } from 'reactstrap';
-
 import userAva from '../../asserts/user.png';
 import SearchInput from '../search-input/SearchInput';
+
 const Header: FC = () => {
 	const currentUser = useAppSelector((state) => selectUser(state));
-	const toggleCart = useAppSelector((state) => selectCartToggle(state));
+
 	const dispatch = useAppDispatch();
 	const handleSignOut = async () => {
 		await ggSignOut();
@@ -55,7 +51,6 @@ const Header: FC = () => {
 					)}
 					<CartIcon />
 				</div>
-				{toggleCart ? null : <CartdDropdown />}
 			</Navbar>
 		</header>
 	);
