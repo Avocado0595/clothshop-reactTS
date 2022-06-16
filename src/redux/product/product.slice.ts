@@ -21,20 +21,20 @@ export const productSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-		// Bắt đầu thực hiện action login (Promise pending)
+		// Promise pending
 		builder.addCase(fetchProduct.pending, (state) => {
 		// Bật trạng thái loading
 		state.isLoading = true;
 		});
 	
-		// Khi thực hiện action login thành công (Promise fulfilled)
+		// Promise fulfilled
 		builder.addCase(fetchProduct.fulfilled, (state, action) => {
 		// Tắt trạng thái loading, lưu thông tin user vào store
 		state.isLoading = false;
 		state.productList = action.payload as IProduct[];
 		});
 	
-		// Khi thực hiện action login thất bại (Promise rejected)
+		// Promise rejected
 		builder.addCase(fetchProduct.rejected, (state, action) => {
 		// Tắt trạng thái loading, lưu thông báo lỗi vào store
 		state.isLoading = false;

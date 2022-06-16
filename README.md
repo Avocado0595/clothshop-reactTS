@@ -30,4 +30,32 @@
    - lưu ý ở hook useEffect có return hàm này là để hủy connect đến firebase khi component này mất đi.
 5. get api -> get ở layout component => không cần thiết => redux-thunk (dĩ nhiên là ko gọi trong reducer dc vì get api là async, còn reducer chỉ nhận pure function)
 6. chỉnh sửa việc gọi api product tại route cần load, ko gọi những nơi không cần @@ mà cái này cần gọi hết
-7. 
+7. Redux Saga
++ redux-thunk: middleware xử lý async:
+    - hàm xử lý async
+    - createAsyncThunk(tên action, hàm xử lý async=>return data)
+    - gọi reducer thunk bằng extraReducers
+    - dispatch(hàm xử lý async) =>gọi extraReducers
++ Generator function
+```js
+function* anotherGenerator(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function* generator(i) {
+  yield i;
+  yield* anotherGenerator(i);
+  yield i + 10;
+}
+
+var gen = generator(10);
+
+console.log(gen.next().value); // 10
+console.log(gen.next().value); // 11
+console.log(gen.next().value); // 12
+console.log(gen.next().value); // 13
+console.log(gen.next().value); // 20
+```
+

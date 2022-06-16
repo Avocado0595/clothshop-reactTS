@@ -12,9 +12,17 @@
 	.cart-list {
 		overflow-y: scroll;
 		max-height: 300px;
+		padding: 16px;
+		div{
+			p{
+				text-align: center;
+			}
+		}
 		.cart-empty {
+			display: block;
 			padding: 16px;
 			width: 100px;
+			margin: auto;
 		}
 	}
 	::-webkit-scrollbar {

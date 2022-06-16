@@ -3,8 +3,7 @@ import MenuItem from '../menu-item/MenuItem';
 import './Directory.scss';
 import { useAppSelector } from '../../redux/hooks';
 import { selectCollection } from '../../redux/collection/collection.slice';
-import { addCollection, addProduct, getCollections } from '../../firebase/firebase.utils';
-import { selectProduct } from '../../redux/product/product.slice';
+import {  getCollections } from '../../firebase/firebase.utils';
 
 
 const Directory: FC = () => {
