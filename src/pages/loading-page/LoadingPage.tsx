@@ -1,8 +1,15 @@
 import React from 'react'
-
+import './LoadingPage.scss';
 function LoadingPage() {
   return (
-    <div>Loading...</div>
+    <div className="loading-box">
+  <div className="container">
+    <span className="circle"></span>
+    <span className="circle"></span>
+    <span className="circle"></span>
+    <span className="circle"></span>
+  </div>
+</div>
   )
 }
 

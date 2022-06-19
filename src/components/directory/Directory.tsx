@@ -8,13 +8,6 @@ import {  getCollections } from '../../firebase/firebase.utils';
 
 const Directory: FC = () => {
 	const collectionList = useAppSelector((state) => selectCollection(state));
-	// const productList = useAppSelector(state=>selectProduct(state));
-	useEffect(()=>{
-		const a = async ()=> await getCollections();
-	//	const b = async ()=> await addProduct(productList);
-		a();
-		//b();
-	})
 	return (
 		<div className="directory-menu">
 			{collectionList.map((item) => (

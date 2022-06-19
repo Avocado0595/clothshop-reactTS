@@ -3,6 +3,9 @@ import type { RootState } from '../store';
 import IProduct from '../../interfaces/IProduct';
 import { fetchProduct } from '../../fetch-data/product.fetch';
 
+
+
+
 export interface ProductState {
 	productList: IProduct[];
 	isLoading: boolean;
@@ -20,42 +23,38 @@ export const productSlice = createSlice({
 			state.productList = action.payload;
 		}
 	},
-	extraReducers: (builder) => {
-		// Promise pending
-		builder.addCase(fetchProduct.pending, (state) => {
-		// Bật trạng thái loading
-		state.isLoading = true;
-		});
+	// extraReducers: (builder) => {
+	// 	// Promise pending
+	// 	builder.addCase(fetchProduct.pending, (state) => {
+	// 	// Bật trạng thái loading
+	// 	state.isLoading = true;
+	// 	});
 	
-		// Promise fulfilled
-		builder.addCase(fetchProduct.fulfilled, (state, action) => {
-		// Tắt trạng thái loading, lưu thông tin user vào store
-		state.isLoading = false;
-		state.productList = action.payload as IProduct[];
-		});
+	// 	// Promise fulfilled
+	// 	builder.addCase(fetchProduct.fulfilled, (state, action) => {
+	// 	// Tắt trạng thái loading, lưu thông tin user vào store
+	// 	state.isLoading = false;
+	// 	state.productList = action.payload as IProduct[];
+	// 	});
 	
-		// Promise rejected
-		builder.addCase(fetchProduct.rejected, (state, action) => {
-		// Tắt trạng thái loading, lưu thông báo lỗi vào store
-		state.isLoading = false;
-		state.errMessage = action.payload;
-		});
-	}
+	// 	// Promise rejected
+	// 	builder.addCase(fetchProduct.rejected, (state, action) => {
+	// 	// Tắt trạng thái loading, lưu thông báo lỗi vào store
+	// 	state.isLoading = false;
+	// 	state.errMessage = action.payload;
+	// 	});
+	// }
 });
 
 export const { getProduct, getProductFromApi } = productSlice.actions;
-
 export const selectProduct = (state: RootState) => state.product.productList;
 export const selectByProductId = (state: RootState, id: number) =>
 	state.product.productList.filter((p) => p.id === id)[0];
-
 export const selectByCollection = (state: RootState, id: number) =>
 state.product.productList.filter((p) => p.collectionId === id);
-
 export const selectSearchProduct = (state: RootState, p: string) =>
 	state.product.productList.filter((i) =>
 		i.name.toLowerCase().includes(p.toLowerCase()));
-
 export const selectListProductName = (state: RootState) =>
 	state.product.productList.map((i) => ({ name: i.name, id: i.id }));
 
