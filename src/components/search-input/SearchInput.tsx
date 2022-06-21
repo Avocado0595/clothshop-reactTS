@@ -52,8 +52,7 @@ const SearchInput: FC = () => {
 					{resultList.map((i, idx) => (
 						<a key={idx} href={`/product/${i.id}`}>{i.name}</a>
 					))}
-				</div>
-			) : null}
+				</div>) : null}
 		</InputGroup>
 	);
 };

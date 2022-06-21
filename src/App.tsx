@@ -15,14 +15,14 @@ import Search from './pages/search/Search';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import { getCollectionFromApi } from './redux/collection/collection.slice';
 import LoadingPage from './pages/loading-page/LoadingPage';
-import { fetchProduct } from './fetch-data/product.fetch';
+import { addProductAsync } from './redux/product/product.saga';
 const App: FC = () => {
 	const auth = getAuth();
 	const currentUser = useAppSelector((state) => selectUser(state));
 	const dispatch = useAppDispatch();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	useEffect(() => {
-		dispatch(fetchProduct());
+		dispatch(addProductAsync());
 		const data = async ()=> {
 			setIsLoading(true);
 			setPersistenceFirebase();

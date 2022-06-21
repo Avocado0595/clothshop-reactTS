@@ -30,4 +30,93 @@
    - lưu ý ở hook useEffect có return hàm này là để hủy connect đến firebase khi component này mất đi.
 5. get api -> get ở layout component => không cần thiết => redux-thunk (dĩ nhiên là ko gọi trong reducer dc vì get api là async, còn reducer chỉ nhận pure function)
 6. chỉnh sửa việc gọi api product tại route cần load, ko gọi những nơi không cần @@ mà cái này cần gọi hết
-7. 
+7. Redux Saga
++ redux-thunk: middleware xử lý async:
+    - hàm xử lý async
+    - createAsyncThunk(tên action, hàm xử lý async=>return data)
+    - gọi reducer thunk bằng extraReducers
+    - dispatch(hàm xử lý async) =>gọi extraReducers
++ Generator function
+```js
+function* anotherGenerator(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function* generator(i) {
+  yield i;
+  yield* anotherGenerator(i);
+  yield i + 10;
+}
+
+var gen = generator(10);
+
+console.log(gen.next().value); // 10
+console.log(gen.next().value); // 11
+console.log(gen.next().value); // 12
+console.log(gen.next().value); // 13
+console.log(gen.next().value); // 20
+```
++ use middleware as callback: ``middleware: (getDefaultMiddleware)=>  [...getDefaultMiddleware({thunk: false}), sagaMiddleware]``
++ 
+### Hướng dẫn redux-saga với typescript
+1. install redux-saga: ``npm i redux-saga``, ``npm i -D @types/redux-saga``
+2. Config saga với action
+```ts
+import { createAction, PayloadAction } from '@reduxjs/toolkit';
+import IProduct from '../../interfaces/IProduct';
+import { fetchProduct } from '../../fetch-data/product.fetch';//hàm fetch data từ api
+import { getProductFromApi } from './product.slice';//reducer add data vào state của product
+//import { call, put, take, takeLatest } from 'redux-saga/effects';
+//thay vì import trên này thì
+import * as Effects from "redux-saga/effects";
+//sau đó cast type cho any để ko bị báo lỗi
+const call:any = Effects.call;
+const put:any = Effects.put;
+const takeEvery = Effects.takeEvery;
+//tạo action
+export const addProductAsync = createAction('product/addProductAsync');
+//tạo 1 reducer là generator function để call hàm async
+function* addProductSaga(action:PayloadAction<IProduct[]>) {
+  //call: gọi tới 1 hàm async,trả về 1 hàm promise, chờ hàm này thực thi xong
+  const data:IProduct[] = yield call(fetchProduct, action.payload);
+  //call thực thi xong, sẽ thực hiện put: dispatch 1 action của reducer bên slice
+  yield put(getProductFromApi(data));
+}
+//export saga vừa tạo
+export function* productSaga() {
+  //takeEvery(action.type, reducer): thực hiện khi gọi action.type tương ứng
+  yield takeEvery(addProductAsync.toString(), addProductSaga);
+}
+```
+3. Tạo rootSaga: gom các saga khác nhau về
+```ts
+import { all } from 'redux-saga/effects';
+import { productSaga } from './product/product.saga';
+
+export default function* rootSaga() {
+  yield all([productSaga()]);//thực thi các saga song song
+}
+```
+4. Add saga vào middleware của store
+```ts
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './rootReducer';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga';
+// disalbe thunk and add redux-saga middleware
+const sagaMiddleware = createSagaMiddleware();
+//const middleware = (getDefaultMiddleware)=>  [...getDefaultMiddleware(), sagaMiddleware];
+
+export const store = configureStore({
+	reducer: rootReducer,
+	middleware: (getDefaultMiddleware)=>  [...getDefaultMiddleware({thunk: false, serializableCheck: false,}), sagaMiddleware]
+});
+sagaMiddleware.run(rootSaga);
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+```
+5. gọi saga này khi cần: ``dispatch(addProductAsync());``
