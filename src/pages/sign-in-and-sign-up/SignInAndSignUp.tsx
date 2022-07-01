@@ -1,4 +1,4 @@
-import { Container, Row } from 'reactstrap';
+import { Container, Row } from 'react-bootstrap';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import './SignInAndSignUp.scss';

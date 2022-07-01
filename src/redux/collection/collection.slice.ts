@@ -1,12 +1,15 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit';
 import ICollection from '../../interfaces/ICollection';
 import type { RootState } from '../store';
+import { getCollectionList } from './collection.api';
 
 export interface CollectionState {
-	collectionList: ICollection[];
+	collectionList: ICollection[],
+	isLoading: boolean,
+	errMessage?:any
 }
 
-const initialState: CollectionState = { collectionList: [] };
+const initialState: CollectionState = { collectionList: [], isLoading: false };
 
 export const collectionSlice = createSlice({
 	name: 'collection',
@@ -18,11 +21,25 @@ export const collectionSlice = createSlice({
 		}
 		
 	},
+	extraReducers: (builder) => {
+		builder.addCase(getCollectionList.pending, (state) => {
+			state.isLoading = true;
+		});
+	
+		builder.addCase(getCollectionList.fulfilled, (state, action) => {
+		state.isLoading = false;
+		state.collectionList = action.payload as ICollection[];
+		});
+	
+		builder.addCase(getCollectionList.rejected, (state, action) => {
+		state.isLoading = false;
+		state.errMessage = action.payload;
+		});
+	}
 });
 
 export const { getCollection, getCollectionFromApi } = collectionSlice.actions;
 
-export const selectCollection = (state: RootState) =>
-	state.collection.collectionList;
+export const selectCollection = (state: RootState) =>state.collection.collectionList;
 
 export default collectionSlice.reducer;

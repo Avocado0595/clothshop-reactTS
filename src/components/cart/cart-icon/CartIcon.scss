@@ -30,3 +30,13 @@
 		}
 	}
 }
+
+@media screen and (max-width: 576px) {
+	.cart-count {
+		top: 37% !important;
+		left: 42% !important;
+	}
+	.cart-icon {
+		width: 28px !important;
+	}
+}

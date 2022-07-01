@@ -1,45 +1,61 @@
-.input-group {
-	flex: 1;
-	font-size: 16px;
-	padding: 6px 10px;
-	border-radius: 16px;
-	border: 1px solid rgba(51, 51, 51, 0.169);
 
-	input {
-		background-color: #f7f5f2;
-		border: none;
-		outline: none;
-		&:focus {
-			outline: none;
-		}
-	}
-	.search-dropdown {
-		position: absolute;
-		margin-top: 2px;
-		top: 100%;
-		left: 0;
-		width: 100%;
-		height: auto;
-		overflow-y: auto;
-		max-height: 300px;
-		border: 1px solid rgba(51, 51, 51, 0.169);
-		background-color: white;
-		text-align: left;
-		a {
-			padding: 4px 8px;
-			display: block;
-			text-decoration: none;
-			color: black;
-			&:hover {
-				background-color: rgb(192, 192, 192);
-			}
+/// 
+.search-dropdown {
+	z-index: 999;
+	position: absolute;
+	margin-top: 2px;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: auto;
+	overflow-y: auto;
+	max-height: 300px;
+	border: 1px solid rgba(51, 51, 51, 0.169);
+	background-color: white;
+	text-align: left;
+	a {
+		padding: 4px 8px;
+		display: block;
+		text-decoration: none;
+		color: black;
+		&:hover {
+			background-color: rgb(192, 192, 192);
 		}
 	}
 }
 .search {
 	cursor: pointer;
+	margin: auto;
 	padding-right: 12px;
-	.search-icon {
-		width: 20px;
+	
+}
+.search-icon {
+	width: 20px;
+}
+.form-control{
+	border-top-left-radius: 30px !important;
+	border-bottom-left-radius: 30px !important;
+	&:focus, &:active {
+		color: #212529;
+		outline: 0;
+		 box-shadow: none !important;
+		 overflow: hidden;
 	}
+}
+
+.input-group{
+	border-radius: 16px !important;
+	width: unset !important;
+	
+}
+.input-group-text{
+	border-top-right-radius: 30px !important;
+	border-bottom-right-radius: 30px !important;
+	&:hover{
+		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	
 }

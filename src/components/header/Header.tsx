@@ -2,57 +2,87 @@ import './Header.scss';
 import { Link } from 'react-router-dom';
 import Logo from '../../asserts/crown.svg';
 import { ggSignOut } from '../../firebase/firebase.utils';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { clearCurrentUser, selectUser } from '../../redux/user/user.slice';
 import CartIcon from '../cart/cart-icon/CartIcon';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { Navbar } from 'reactstrap';
+//import { Navbar } from 'reactstrap';
 import userAva from '../../asserts/user.png';
 import SearchInput from '../search-input/SearchInput';
+import {
+	Button,
+	Col,
+	Container,
+	Form,
+	FormControl,
+	Modal,
+	Nav,
+	Navbar,
+	NavDropdown,
+	Row,
+} from 'react-bootstrap';
+import HeaderNav from '../nav/HeaderNav';
 
 const Header: FC = () => {
-	const currentUser = useAppSelector((state) => selectUser(state));
-
-	const dispatch = useAppDispatch();
-	const handleSignOut = async () => {
-		await ggSignOut();
-		dispatch(clearCurrentUser());
+	
+	const [show, setShow] = useState(false);
+	
+	const handleShow = () => {
+		setShow(true);
 	};
+
 	return (
-		<header className="header">
-			<Navbar fixed="top">
-				<Link to="/" className="header-link">
-					<ReactSVG className="header-logo" src={Logo} />
-					<h1>MY CLOTH SHOP</h1>
-				</Link>
+		<Navbar className="header-nav" bg="light" expand="lg" fixed="top">
+			<Container className="flex-column">
+				<Row className="flex-nowrap justify-content-between w-100">
+					<Col className="justify-content-start d-lg-none d-xl-none col-md-2 d-md-flex d-xs-flex">
+						<Navbar.Toggle className="ms-0" onClick={handleShow} />
+					</Col>
 
-				<div className="header-menu">
-					<Link className="header-item " to="/shop">
-						SHOP
-					</Link>
-					<Link className="header-item" to="/contact">
-						CONTACT
-					</Link>
-					<SearchInput />
-
-					{!currentUser ? (
-						<Link className="header-item" to="/signin">
-							<div className="header-item">SIGN IN</div>
+					<Col className='col-md-8 col-lg-4 col-xl-4'>
+						<Link className="header-link mx-auto" to="/">
+							<div className="header-link--inner">
+								<ReactSVG className="header-logo" src={Logo} />
+								<h1 className="d-none d-md-block">
+									MY CLOTH SHOP
+								</h1>
+							</div>
 						</Link>
-					) : (
-						<a className="header-item" onClick={handleSignOut}>
-							<img
-								className="avatar-icon"
-								src={currentUser.photoURL || userAva}
-							/>
-							SIGN OUT
-						</a>
-					)}
-					<CartIcon />
-				</div>
-			</Navbar>
-		</header>
+					</Col>
+
+					<Col className="d-none d-md-none d-lg-flex d-xl-flex">
+						<SearchInput />
+					</Col>
+
+					<Col className="d-flex justify-content-end">
+						
+						<Navbar
+							style={{ minWidth: '270px' }}
+							className=" flex-nowrap d-xl-flex d-lg-flex d-md-none align-items-end justify-content-end d-none "
+						>
+							<HeaderNav setShow={setShow}/>
+						</Navbar>
+						<CartIcon />
+					</Col>
+				</Row>
+			</Container>
+			<Modal
+				show={show}
+				fullscreen="lg-down"
+				onHide={() => setShow(false)}
+				
+			>
+				<Modal.Header closeButton>
+					<Modal.Title><Link to="/">HOME</Link></Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+				<HeaderNav setShow={setShow}/>
+							<SearchInput />
+				</Modal.Body>
+			</Modal>
+		</Navbar>
+		
 	);
 };
 

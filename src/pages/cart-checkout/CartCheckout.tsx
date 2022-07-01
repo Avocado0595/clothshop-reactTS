@@ -15,6 +15,8 @@ import { selectUser } from '../../redux/user/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { createUserCart } from '../../firebase/firebase.utils';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Table } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const CartCheckout: FC = () => {
 	const cartList = useAppSelector((state) => selectCartList(state));
@@ -40,16 +42,16 @@ const CartCheckout: FC = () => {
 	}
 	if (cartList.length !== 0)
 		return (
-			<div>
+			<Container>
 				<h3>Checkout</h3>
-				<table>
+				<Table className='responsive striped'>
 					<thead>
 						<tr>
 							<th>Product</th>
 							<th>Name</th>
 							<th>Quantity</th>
 							<th>Price</th>
-							<th>Remove</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,7 +99,7 @@ const CartCheckout: FC = () => {
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</Table>
 				<h3>TOTAL: {totalPrice}$</h3>
 				<button onClick={handleCheckout}>CHECK OUT HERE</button>
 				<Modal isOpen={modalState.modal} toggle={toggle} >
@@ -110,7 +112,7 @@ const CartCheckout: FC = () => {
           </ModalFooter>
         </Modal>
 
-			</div>
+			</Container>
 		);
 	else
 		return (

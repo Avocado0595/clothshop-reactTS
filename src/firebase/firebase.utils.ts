@@ -11,7 +11,7 @@ import {
 	updateProfile,
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
-import IUser from '../interfaces/IUser';
+import IUser from '../redux/user/user.interface';
 import ICollection from '../interfaces/ICollection';
 import IProduct from '../interfaces/IProduct';
 

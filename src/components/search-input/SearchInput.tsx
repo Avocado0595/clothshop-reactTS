@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InputGroup } from 'reactstrap';
+import { Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 import searchIcon from '../../asserts/search.png';
 import { useAppSelector } from '../../redux/hooks';
 import { selectListProductName } from '../../redux/product/product.slice';
@@ -36,25 +36,23 @@ const SearchInput: FC = () => {
 			);
 		else setResultList([]);
 	};
-	return (
-		<InputGroup className="header-item">
-			<div onClick={handleSearchClick} className="search">
-				<img className="search-icon" src={searchIcon} />
-			</div>
-			<input
-				onKeyDown={handleOnEnter}
-				type="text"
-				value={value}
-				onChange={handleOnChange}
-			/>
-			{resultList.length != 0 ? (
+	return (<InputGroup className="mt-1 w-100">
+    
+    <FormControl
+    placeholder="Find your style here"
+    aria-label="Search"
+    aria-describedby="search"
+	onChange={handleOnChange}
+	onKeyDown={handleOnEnter}
+    />
+	<InputGroup.Text id="search"><img className="search-icon" src={searchIcon} /></InputGroup.Text>
+	{resultList.length != 0 ? (
 				<div className="search-dropdown">
 					{resultList.map((i, idx) => (
 						<a key={idx} href={`/product/${i.id}`}>{i.name}</a>
 					))}
 				</div>) : null}
-		</InputGroup>
-	);
+  </InputGroup>)
 };
 
 export default SearchInput;

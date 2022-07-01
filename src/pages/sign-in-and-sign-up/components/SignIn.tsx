@@ -8,6 +8,7 @@ import initauth from '../../../firebase/firebase.utils';
 import Loading from '../../../components/loading-icon/Loading';
 import { Col } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
@@ -63,10 +64,10 @@ export default function SignIn() {
 					required={true}
 					errMessage={errMessage?.['password']}
 				/>
-				<div className="btn-group">
+				<Container className="btn-group justify-content-center d-flex flex-lg-row flex-xl-row flex-column ">
 					<CustomButton type="submit" content="sign in" />
 					<GoogleButton />
-				</div>
+				</Container>
 			</form>
 		</Col>
 	);

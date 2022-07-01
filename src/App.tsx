@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, lazy, Suspense, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { selectUser, setCurrentUser } from './redux/user/user.slice';
@@ -15,22 +15,19 @@ import Search from './pages/search/Search';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import { getCollectionFromApi } from './redux/collection/collection.slice';
 import LoadingPage from './pages/loading-page/LoadingPage';
-import { fetchProduct } from './fetch-data/product.fetch';
+import { getProductList } from './redux/product/product.api';
+import { Container } from 'react-bootstrap';
+
+
 const App: FC = () => {
+	const dispatch = useAppDispatch();
 	const auth = getAuth();
 	const currentUser = useAppSelector((state) => selectUser(state));
-	const dispatch = useAppDispatch();
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setLoading] = useState(true);
 	useEffect(() => {
-		dispatch(fetchProduct());
-		const data = async ()=> {
-			setIsLoading(true);
-			setPersistenceFirebase();
-			const collections = await getCollections();
-			dispatch(getCollectionFromApi(collections));
-			setIsLoading(false);
-		}
+		dispatch(getProductList());
 		const checkOut = onAuthStateChanged(auth, async (user) => {
+			setLoading(true);
 			if (user) {
 				const createdUser = {uid: user.uid,
 					displayName: user.displayName|| '',
@@ -39,16 +36,15 @@ const App: FC = () => {
 				await createUserProfile(createdUser);
 				dispatch(setCurrentUser(createdUser));
 			}
+			setLoading(false);
 		});
-		data();
+		setPersistenceFirebase();
 		return () => checkOut(); //componentWillUnMount()
-	}, []);
-	if(isLoading)
-		return (<LoadingPage/>)
-	else
-	return (
-		<div className="App container-fluid">
+	}, [dispatch]);
+	
+	return (!isLoading?(<div className="App container-fluid">
 			<Header />
+			<div className='container-fluid'>
 			<Routes>
 				<Route index element={<Homepage />} />
 				<Route path="/shop" element={<ShopPage />} />
@@ -68,7 +64,9 @@ const App: FC = () => {
 					}
 				/>
 			</Routes>
-		</div>
+			</div>
+			
+		</div>):<LoadingPage/>
 	);
 };
 

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import IProduct from '../../interfaces/IProduct';
-import { fetchProduct } from '../../fetch-data/product.fetch';
+import { getProductList } from './product.api';
 
 export interface ProductState {
 	productList: IProduct[];
@@ -21,22 +21,16 @@ export const productSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-		// Promise pending
-		builder.addCase(fetchProduct.pending, (state) => {
-		// Bật trạng thái loading
+		builder.addCase(getProductList.pending, (state) => {
 		state.isLoading = true;
 		});
 	
-		// Promise fulfilled
-		builder.addCase(fetchProduct.fulfilled, (state, action) => {
-		// Tắt trạng thái loading, lưu thông tin user vào store
+		builder.addCase(getProductList.fulfilled, (state, action) => {
 		state.isLoading = false;
 		state.productList = action.payload as IProduct[];
 		});
 	
-		// Promise rejected
-		builder.addCase(fetchProduct.rejected, (state, action) => {
-		// Tắt trạng thái loading, lưu thông báo lỗi vào store
+		builder.addCase(getProductList.rejected, (state, action) => {
 		state.isLoading = false;
 		state.errMessage = action.payload;
 		});

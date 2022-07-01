@@ -10,8 +10,8 @@ $textcolor: black;
 	width: 300px;
 	height: 60px;
 	&:hover {
-		background-color: rgb(240, 240, 240);
-		cursor: pointer;
+		background-color: white !important;
+		color: black !important;
 	}
 	margin-left: 36px;
 	.google-btn--logo {
