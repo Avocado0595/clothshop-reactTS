@@ -1,13 +1,13 @@
 .preview-item {
 	cursor: pointer;
-	$item-height: 420px;
+	--item-height: 420px;
 	height: 150%;
 	margin-bottom: 24px;
 	.item-img {
 		position: relative;
 		width: 100%;
 		object-fit: cover;
-		min-height: calc($item-height - 50px);
+		min-height: calc(var(--item-height) - 50px);
 		background-size: cover;
 		background-repeat: no-repeat;
 		margin: auto;
@@ -55,5 +55,27 @@
 	.item-info {
 		display: flex;
 		justify-content: space-between;
+		.item-add-cart{
+			width: 30px;
+			.item-svg{
+				div svg{
+					width: 20px;
+				}
+			}
+		}
 	}
+}
+
+@media screen and (max-width: 768px) {
+	.preview-item{
+		--item-height: 300px;
+	}
+	
+}
+
+@media screen and (min-width: 769.1px) and (max-width: 992px) {
+	.preview-item{
+		--item-height: 300px;
+	}
+	
 }

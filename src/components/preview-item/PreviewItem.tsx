@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 import { Col } from 'reactstrap';
 import IProduct from '../../interfaces/IProduct';
 import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch } from '../../redux/hooks';
 import './PreviewItem.scss';
+import addCartIcon from '../../asserts/add-cart.svg';
 const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();

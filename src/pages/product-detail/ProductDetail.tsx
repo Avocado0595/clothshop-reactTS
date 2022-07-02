@@ -1,26 +1,43 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectByProductId } from '../../redux/product/product.slice';
+import { getProductById } from '../../redux/product/product.api';
+import { selectCurrentProduct, selectLoading } from '../../redux/product/product.slice';
+import { RootState } from '../../redux/store';
+import LoadingPage from '../loading-page/LoadingPage';
 import './ProductDetail.scss';
 
-const ProductDetail: FC = () => {
-	const { productId } = useParams();
-	const product = useAppSelector((state) =>
-		selectByProductId(state, parseInt(productId ?? ''))
-	);
+const ProductDetail = () => {
 	const dispatch = useAppDispatch();
+	const { id } = useParams();
+	const product = useAppSelector((state:RootState)=>selectCurrentProduct(state));
+	const {loading, errMessage} = useAppSelector((state:RootState)=>selectLoading(state));
+	useEffect(()=>{
+		dispatch(getProductById({id}))
+	},[dispatch])
+	// const product = useAppSelector((state) =>
+	// 	selectByProductId(state, productId ?? '')
+	// );
+	
+
+	//loading=true, err:'', product:null
+	if(loading)
+		return <LoadingPage/>;
+	//loading: false, err:'eqeqe'
+	if(errMessage != '')
+		return <h1>Product not found!</h1>
 	if (product)
 		return (
-			<Container className="product-detail">
+			<Container className="product-detail flex-column flex-md-row flex-xl-row flex-lg-row">
 				<img
-					className="product-img"
+					className="product-img-detail"
 					alt={product.name}
 					src={product.imageUrl}
 				/>
 				<div className="product-info">
+				
 					<h3 className="product-name">{product.name}</h3>
 					<p className="product-description">
 						Description: {product.description}
@@ -37,7 +54,8 @@ const ProductDetail: FC = () => {
 				</div>
 			</Container>
 		);
-	else return <h3>Not found!</h3>;
+	
+	
 };
 
 export default ProductDetail;

@@ -39,6 +39,7 @@ const SearchInput: FC = () => {
 	return (<InputGroup className="mt-1 w-100">
     
     <FormControl
+	style={{paddingLeft:'16px'}}
     placeholder="Find your style here"
     aria-label="Search"
     aria-describedby="search"

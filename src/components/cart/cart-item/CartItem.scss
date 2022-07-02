@@ -6,10 +6,13 @@
 	flex-direction: row;
 	white-space: unset !important;
 	.cart-item-img {
-		width: 60px;
+		width: 40px;
 	}
 	.cart-item-info {
 		margin-left: 16px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 		p {
 			padding: 0;
 			margin: 0;

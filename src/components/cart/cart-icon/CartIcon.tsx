@@ -4,7 +4,7 @@ import cartIcon from '../../../asserts/shopping-cart.png';
 import { selectCartList } from '../../../redux/cart/cart.slice';
 
 import { useAppSelector } from '../../../redux/hooks';
-import { Dropdown, DropdownToggle} from 'reactstrap';
+import { Dropdown} from 'react-bootstrap';
 
 import CartMenu from '../cart-dropdown/CartMenu';
 const CartIcon: FC = () => {
@@ -17,11 +17,11 @@ const CartIcon: FC = () => {
 	};
 
 	return (
-		<Dropdown isOpen={dropState.dropdownOpen} toggle={toggle}>
-        <DropdownToggle>
+		<Dropdown>
+        <Dropdown.Toggle>
 			<div className="cart-count">{numberOfItem}</div>
 			<img alt="cart" className="cart-icon" src={cartIcon} />
-        </DropdownToggle>
+        </Dropdown.Toggle>
 		<CartMenu/>
       </Dropdown>
 	);

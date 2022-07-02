@@ -24,7 +24,7 @@ import {
 } from 'react-bootstrap';
 import HeaderNav from '../nav/HeaderNav';
 
-const Header: FC = () => {
+const Header = () => {
 	
 	const [show, setShow] = useState(false);
 	
@@ -40,7 +40,7 @@ const Header: FC = () => {
 						<Navbar.Toggle className="ms-0" onClick={handleShow} />
 					</Col>
 
-					<Col className='col-md-8 col-lg-4 col-xl-4'>
+					<Col className='d-flex col-md-8 col-lg-4 col-xl-4'>
 						<Link className="header-link mx-auto" to="/">
 							<div className="header-link--inner">
 								<ReactSVG className="header-logo" src={Logo} />

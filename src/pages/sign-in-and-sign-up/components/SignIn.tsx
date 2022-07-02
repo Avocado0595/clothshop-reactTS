@@ -8,7 +8,7 @@ import initauth from '../../../firebase/firebase.utils';
 import Loading from '../../../components/loading-icon/Loading';
 import { Col } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
@@ -44,7 +44,7 @@ export default function SignIn() {
 					<Loading />
 				</div>
 			) : null}
-			<h2>If you already had an account</h2>
+			<h4>If you already had an account</h4>
 			<span>Sign in with your email and password here.</span>
 			<form
 				onSubmit={handleSubmit}
@@ -64,10 +64,10 @@ export default function SignIn() {
 					required={true}
 					errMessage={errMessage?.['password']}
 				/>
-				<Container className="btn-group justify-content-center d-flex flex-lg-row flex-xl-row flex-column ">
-					<CustomButton type="submit" content="sign in" />
+				<Row className="mt-2 g-4 btn-group justify-content-space-between d-flex flex-lg-row flex-xl-row flex-column ">
+					<CustomButton type="submit" content="Sign in" />
 					<GoogleButton />
-				</Container>
+				</Row>
 			</form>
 		</Col>
 	);

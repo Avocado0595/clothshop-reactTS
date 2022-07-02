@@ -4,7 +4,7 @@ import './CartMenu.scss';
 import { useNavigate } from 'react-router-dom';
 import cartEmpty from '../../../asserts/empty-cart.png';
 import { useAppSelector } from '../../../redux/hooks';
-import { DropdownMenu } from 'reactstrap';
+import { Dropdown } from 'react-bootstrap';
 const CartdDropdown: FC = () => {
 	const itemList = useAppSelector((state) => state.cart.itemList);
 	const navigate = useNavigate();
@@ -12,13 +12,12 @@ const CartdDropdown: FC = () => {
 		navigate('/checkout');
 	};
 	return (
-		<DropdownMenu className="cart-dropdown">
+		<Dropdown.Menu className="cart-dropdown">
 			<div className="cart-list">
 				{itemList.length === 0?<div>
 						<p>You don't have any product in cart.</p>
 						<img className="cart-empty" src={cartEmpty}></img>
-					</div>:
-					<div>
+					</div>:<div>
 						{itemList.map((item) => <CartItem key={item.id} item={item} />)}
 						</div>}
 			</div>
@@ -27,7 +26,7 @@ const CartdDropdown: FC = () => {
 					CHECK OUT
 				</button>
 			) : null}
-		</DropdownMenu>
+		</Dropdown.Menu>
 	);
 };
 

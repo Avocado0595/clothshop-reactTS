@@ -1,21 +1,24 @@
 .cart-dropdown {
 	border-radius: 5px;
-	position: absolute;
-	width: 250px;
+	width: 260px;
 	height: auto;
 	background-color: white;
-	// right: 55px;
-	// top: 75px;
+	right: 0 !important;
+	left: unset !important;
 	z-index: 999;
 	border: 1px solid #555;
-	transition: transform ease-in-out 0.3s;
+	//transition: transform ease-in-out 0.3s;
 	.cart-list {
 		overflow-y: scroll;
 		max-height: 300px;
-		padding: 16px;
+		padding: 16px 0;
 		div{
 			p{
-				text-align: center;
+				text-align: left;
+				white-space: nowrap;
+				overflow: hidden;
+				max-width: 151.9px;
+				text-overflow: ellipsis;
 			}
 		}
 		.cart-empty {

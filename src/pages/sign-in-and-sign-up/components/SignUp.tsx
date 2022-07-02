@@ -6,6 +6,7 @@ import { createUser } from '../../../firebase/firebase.utils';
 import './SignUp.scss';
 import { Col } from 'reactstrap';
 import Loading from '../../../components/loading-icon/Loading';
+import { Container } from 'react-bootstrap';
 
 export default function SignUp() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
@@ -50,7 +51,7 @@ export default function SignUp() {
 					<Loading />
 				</div>
 			) : null}
-			<h2>If you don't have any account</h2>
+			<h4>If you don't have any account</h4>
 			<span>Sign up with your email and password here.</span>
 			<form onSubmit={handleSubmit}>
 				<Input
@@ -81,9 +82,9 @@ export default function SignUp() {
 					required={true}
 					errMessage={errMessage?.['confirmPassword']}
 				/>
-				<div className="btn-group">
-					<CustomButton type="submit" content="sign up" />
-				</div>
+				<Container className="mt-4">
+					<CustomButton type="submit" content="Sign up" />
+				</Container>
 			</form>
 		</Col>
 	);

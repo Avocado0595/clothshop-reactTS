@@ -1,18 +1,11 @@
-$maincolor: black;
-$subcolor: white;
 .custom-btn {
-	border-radius: 4px;
-	font-size: 18px;
-	margin-top: 32px;
-	background-color: $maincolor;
-	border: solid 1px $maincolor;
-	color: $subcolor;
-	width: 200px;
+	border: solid 1px black;
+	color: white;
+	width: 100%;
 	min-width: 150px;
 	height: 60px;
 	&:hover {
-		background-color: $subcolor;
-		color: $maincolor;
-		cursor: pointer;
+		background-color: white !important;
+		color: black !important;
 	}
 }

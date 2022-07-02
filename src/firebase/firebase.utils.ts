@@ -42,57 +42,57 @@ export const createUser = async (
 		updateProfile(user, { displayName: account.displayName });
 };
 
-
 export const ggSignOut = async () => await signOut(auth);
-
 
 export const createUserProfile = async (user: IUser) => {
 	try {
-		const userRef = doc(db,`users/${user.uid}`);
+		const userRef = doc(db, `users/${user.uid}`);
 		const userSnapShot = await getDoc(userRef);
-		if(!userSnapShot.exists())
-		await setDoc(userRef, {
-			displayName: user.displayName,
-			email: user.email,
-			createdAt: new Date()
-		});
+		if (!userSnapShot.exists())
+			await setDoc(userRef, {
+				displayName: user.displayName,
+				email: user.email,
+				createdAt: new Date()
+			});
 	} catch (e) {
 		console.error('Error adding document: ', e);
 	}
 };
 
-export const createUserCart = async(userUid: string, cartList: {id: number, name: string, price: number, quantity:number}[])=>{
-	try{
+export const createUserCart = async (userUid: string, cartList: { id: number, name: string, price: number, quantity: number }[]) => {
+	try {
 		const userCartRef = doc(collection(db, `userCart`));
-		await setDoc(userCartRef,{
+		await setDoc(userCartRef, {
 			userUid: userUid,
 			productList: [...cartList]
 		});
 	}
-	catch(e){
+	catch (e) {
 		console.error('Error adding cart: ', e);
 	}
 }
 
-export const getCollections = async ()=>{
+export const getCollections = async () => {
 	const q = query(collection(db, "collections"));
 	const querySnapshot = await getDocs(q);
-	return querySnapshot.docs.map((doc:any) => {
+	return querySnapshot.docs.map((doc: any) => {
 		return doc.data() as ICollection
 	});
 }
-export const getProducts = async ()=>{
+
+export const getProducts = async () => {
 	const q = query(collection(db, "products"));
 	const querySnapshot = await getDocs(q);
-	return querySnapshot.docs.map((doc:any) => {
+	return querySnapshot.docs.map((doc: any) => {
 		return doc.data() as IProduct
 	});
 }
 
-export const setPersistenceFirebase =()=>{ setPersistence(
-	auth,
-	browserSessionPersistence
-)
+export const setPersistenceFirebase = () => {
+	setPersistence(
+		auth,
+		browserSessionPersistence
+	)
 	.then(() => {
 		return null;
 	})

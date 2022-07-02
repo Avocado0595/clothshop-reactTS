@@ -1,12 +1,16 @@
 import React from 'react';
+import { Button, Col } from 'react-bootstrap';
 import './CustomButton.scss';
 export default function CustomButton(props: {
 	content: string;
 	type: 'button' | 'submit' | 'reset' | undefined;
 }) {
 	return (
-		<button disabled={false} className="custom-btn" type={props.type}>
-			{props.content.toUpperCase()}
-		</button>
+		<Col>
+		<Button style={{borderColor:'black', backgroundColor:'black'}} disabled={false} className="custom-btn" type={props.type}>
+			{props.content}
+		</Button>
+		</Col>
+		
 	);
 }

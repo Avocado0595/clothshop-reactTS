@@ -1,14 +1,22 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
+import { getCollectionList } from '../../redux/collection/collection.api';
 import { selectCollection } from '../../redux/collection/collection.slice';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
-const Category: FC = () => {
-	const { categoryName } = useParams();
+const Collection = () => {
+	const dispatch = useAppDispatch();
+	const { collectionName } = useParams();
 	const collectionList = useAppSelector((state) => selectCollection(state));
+	useEffect(()=>{
+		if(collectionList){
+			dispatch(getCollectionList());
+		}
+	},[dispatch])
 	const collection = collectionList.filter(
-		(i) => i.title.toLowerCase() === categoryName
+		(i) => i.title.toLowerCase() === collectionName
 	)[0];
 	if (collection)
 		return (
@@ -20,4 +28,4 @@ const Category: FC = () => {
 	else return <h3>Not Found Collection!</h3>;
 };
 
-export default Category;
+export default Collection;
