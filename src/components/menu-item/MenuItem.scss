@@ -1,5 +1,6 @@
 
 .menu-item {
+	height:280px;
 	overflow: hidden;
 	position: relative;
 	.background-item {
@@ -33,4 +34,31 @@
 			transform: scale(1.1);
 		}
 	}
+}
+
+
+@media (min-width: 1400px) {
+	.menu-item{
+		height: 400px !important;
+	}
+}
+
+@media screen and(min-width: 1200px) and (max-width: 1400px) {
+	.menu-item{
+		height: 350px !important;
+	}
+}
+@media screen and(min-width: 992px) and (max-width: 1200px){
+	.menu-item{
+		height: 300px !important;
+	}
+}
+
+@media screen and(min-width: 768px) and(max-width: 992px) {
+	.menu-item{
+		height: 280px !important;
+	}
+}
+@media screen and(min-width: 576px) and(max-width: 768px)  {
+	
 }

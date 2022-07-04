@@ -5,7 +5,7 @@ import PreviewItem from '../../components/preview-item/PreviewItem';
 import { useAppSelector } from '../../redux/hooks';
 import { selectSearchProduct } from '../../redux/product/product.slice';
 
-const Search: FC = () => {
+const Search= () => {
 	const [searchParams] = useSearchParams();
 	const productSearchList = useAppSelector((state) =>
 		selectSearchProduct(state, searchParams.get('p') ?? '')

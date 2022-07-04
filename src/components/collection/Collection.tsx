@@ -10,7 +10,7 @@ import { Row } from 'react-bootstrap';
 const Collection = () => {
 	const collectionList = useAppSelector((state) => selectCollection(state));
 	return (
-		<Row className="directory-menu row-cols-3 justify-content-center">
+		<Row className="directory-menu row-cols-4 justify-content-center">
 			{collectionList.map((item,idx) => (
 				<MenuItem key={idx} item={item} />
 			))}

@@ -7,7 +7,7 @@ import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch } from '../../redux/hooks';
 import './PreviewItem.scss';
 
-const PreviewItem: FC<{ item: IProduct, collection: string }> = ({ item, collection }) => {
+const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	
@@ -19,7 +19,7 @@ const PreviewItem: FC<{ item: IProduct, collection: string }> = ({ item, collect
 			>
 				<div
 					className="item-modal"
-					onClick={() => navigate(`/${collection}/${item.id}`)}
+					onClick={() => navigate(`/${item.collectionId}/${item.id}`)}
 				></div>
 				<div
 					onClick={() => dispatch(addItem({ ...item, quantity: 0 }))}

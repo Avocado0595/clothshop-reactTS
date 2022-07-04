@@ -13,20 +13,22 @@
 		max-height: 300px;
 		padding: 16px 0;
 		div{
+			padding: 0 8px;
 			p{
-				text-align: left;
-				white-space: nowrap;
-				overflow: hidden;
-				max-width: 151.9px;
-				text-overflow: ellipsis;
+				text-align: center;
+				// white-space: nowrap;
+				// overflow: hidden;
+				 max-width: 100%;
+				// text-overflow: ellipsis;
+			}
+			.cart-empty {
+				display: block;
+				padding: 16px;
+				width: 100px;
+				margin: auto;
 			}
 		}
-		.cart-empty {
-			display: block;
-			padding: 16px;
-			width: 100px;
-			margin: auto;
-		}
+		
 	}
 	::-webkit-scrollbar {
 		width: 10px;

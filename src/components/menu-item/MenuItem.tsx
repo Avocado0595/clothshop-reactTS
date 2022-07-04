@@ -6,7 +6,7 @@ export default function MenuItem(props: { item: ICollection }) {
 	const nav = useNavigate();
 	const { item } = props;
 	return (
-		<Col key={item.id} style={{height:'300px'}} className="m-1 col-lg-3 col-xl-3 col-md-5 col-sm-12 col-12 menu-item"
+		<Col key={item.id} className="m-1 col-lg-5 col-xl-5 col-md-5 col-sm-12 col-12 menu-item"
 			onClick={() => {
 				nav(`${item.routeName}`);
 			}}

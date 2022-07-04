@@ -1,14 +1,14 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
+import React, { FC, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {  Dropdown, FormControl, InputGroup } from 'react-bootstrap';
 import searchIcon from '../../asserts/search.png';
 import { useAppSelector } from '../../redux/hooks';
 import { selectListProductName } from '../../redux/product/product.slice';
 import './SearchInput.scss';
-const SearchInput: FC = () => {
+const SearchInput = () => {
 	const [value, setValue] = useState<string>('');
 	const [resultList, setResultList] = useState<
-		Array<{ id: number; name: string }>
+		Array<{ id: string; name: string , collectionId: string}>
 	>([]);
 	const productNameList = useAppSelector((state) =>
 		selectListProductName(state)
@@ -36,6 +36,11 @@ const SearchInput: FC = () => {
 			);
 		else setResultList([]);
 	};
+	const clearSearch = ()=>{
+		setResultList([]);
+		setValue('');
+	}
+
 	return (<InputGroup className="mt-1 w-100">
     
     <FormControl
@@ -47,12 +52,15 @@ const SearchInput: FC = () => {
 	onKeyDown={handleOnEnter}
     />
 	<InputGroup.Text id="search"><img className="search-icon" src={searchIcon} /></InputGroup.Text>
+	
 	{resultList.length != 0 ? (
-				<div className="search-dropdown">
+				<Dropdown.Menu className="search-dropdown show">
 					{resultList.map((i, idx) => (
-						<a key={idx} href={`/product/${i.id}`}>{i.name}</a>
+						<Dropdown.Item onClick={()=>clearSearch()}>
+							<Link className='d-block w-100' key={idx} to={`/${i.collectionId}/${i.id}`}>{i.name}</Link>
+						</Dropdown.Item>
 					))}
-				</div>) : null}
+				</Dropdown.Menu>) : null} 
   </InputGroup>)
 };
 

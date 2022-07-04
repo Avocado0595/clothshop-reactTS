@@ -24,27 +24,6 @@ export const userSlice = createSlice({
 			state.currentUser = null;
 		},
 	},
-	// extraReducers: (builder) => {
-	// 	// Promise pending
-	// 	builder.addCase(fetchProduct.pending, (state) => {
-	// 	// Bật trạng thái loading
-	// 	state.isLoading = true;
-	// 	});
-	
-	// 	// Promise fulfilled
-	// 	builder.addCase(fetchProduct.fulfilled, (state, action) => {
-	// 	// Tắt trạng thái loading, lưu thông tin user vào store
-	// 	state.isLoading = false;
-	// 	state.productList = action.payload as IProduct[];
-	// 	});
-	
-	// 	// Promise rejected
-	// 	builder.addCase(fetchProduct.rejected, (state, action) => {
-	// 	// Tắt trạng thái loading, lưu thông báo lỗi vào store
-	// 	state.isLoading = false;
-	// 	state.errMessage = action.payload;
-	// 	});
-	// }
 });
 
 export const { setCurrentUser, clearCurrentUser } = userSlice.actions;

@@ -16,7 +16,7 @@ const ProductDetail = () => {
 	const {currentProduct:product, isLoading} = useAppSelector((state:RootState)=>state.product);
 	useEffect(()=>{
 		dispatch(getProductById({id}))
-	},[dispatch])
+	},[dispatch,id])
 	if(isLoading)
 		return <LoadingPage/>;
 

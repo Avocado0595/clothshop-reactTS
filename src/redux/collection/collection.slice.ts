@@ -70,5 +70,6 @@ export const collectionSlice = createSlice({
 export const { getCollection, getCollectionFromApi } = collectionSlice.actions;
 
 export const selectCollection = (state: RootState) =>state.collection.collectionList;
+export const selectCurrentCollection = (state: RootState) =>state.collection.currentCollection;
 
 export default collectionSlice.reducer;

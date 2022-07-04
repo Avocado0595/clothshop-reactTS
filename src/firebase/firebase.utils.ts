@@ -59,7 +59,7 @@ export const createUserProfile = async (user: IUser) => {
 	}
 };
 
-export const createUserCart = async (userUid: string, cartList: { id: number, name: string, price: number, quantity: number }[]) => {
+export const createUserCart = async (userUid: string, cartList: { id: string, name: string, price: number, quantity: number }[]) => {
 	try {
 		const userCartRef = doc(collection(db, `userCart`));
 		await setDoc(userCartRef, {
@@ -72,21 +72,7 @@ export const createUserCart = async (userUid: string, cartList: { id: number, na
 	}
 }
 
-export const getCollections = async () => {
-	const q = query(collection(db, "collections"));
-	const querySnapshot = await getDocs(q);
-	return querySnapshot.docs.map((doc: any) => {
-		return doc.data() as ICollection
-	});
-}
 
-export const getProducts = async () => {
-	const q = query(collection(db, "products"));
-	const querySnapshot = await getDocs(q);
-	return querySnapshot.docs.map((doc: any) => {
-		return doc.data() as IProduct
-	});
-}
 
 export const setPersistenceFirebase = () => {
 	setPersistence(

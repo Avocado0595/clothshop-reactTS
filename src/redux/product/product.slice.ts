@@ -79,6 +79,6 @@ export const selectSearchProduct = (state: RootState, p: string) =>
 		i.name.toLowerCase().includes(p.toLowerCase()));
 
 export const selectListProductName = (state: RootState) =>
-	state.product.productList.map((i) => ({ name: i.name, id: i.id }));
+	state.product.productList.map((i) => ({ name: i.name, id: i.id, collectionId: i.collectionId }));
 
 export default productSlice.reducer;

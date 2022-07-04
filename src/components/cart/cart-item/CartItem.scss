@@ -17,6 +17,10 @@
 			padding: 0;
 			margin: 0;
 			text-align: left;
+			text-overflow: ellipsis;
+			max-width: 135px !important;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 	}
 }

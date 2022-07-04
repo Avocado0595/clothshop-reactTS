@@ -15,8 +15,8 @@ const CartdDropdown: FC = () => {
 		<Dropdown.Menu className="cart-dropdown">
 			<div className="cart-list">
 				{itemList.length === 0?<div>
-						<p>You don't have any product in cart.</p>
 						<img alt="empty" className="cart-empty" src={cartEmpty}></img>
+						<p>You don't have any product in cart.</p>
 					</div>:<div>
 						{itemList.map((item) => <CartItem key={item.id} item={item} />)}
 						</div>}

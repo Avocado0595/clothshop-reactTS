@@ -3,7 +3,6 @@ import { Container, Row } from 'react-bootstrap';
 import LoadingPage from '../../pages/loading-page/LoadingPage';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getProductBycollection } from '../../redux/product/product.api';
-import { selectByCollection } from '../../redux/product/product.slice';
 import PreviewItem from '../preview-item/PreviewItem';
 import './PreviewCollection.scss';
 const PreviewCollection: FC<{
@@ -23,7 +22,7 @@ const PreviewCollection: FC<{
 				<h2 className="title">{title.toUpperCase()}</h2>
 				<Row xs="2" md="3" lg="4" className="preview">
 					{productList.map((item) => (
-						<PreviewItem key={item.id} item={item} collection={title} />
+						<PreviewItem key={item.id} item={item} />
 					))}
 				</Row>
 			</Container>

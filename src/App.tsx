@@ -56,9 +56,11 @@ const App = () => {
 			setLoading(false);
 		});
 		setPersistenceFirebase();
-		return () => checkOut(); //componentWillUnMount()
+		return () => checkOut();
 	}, [dispatch]);
-	return !isLoading ? (
+	if(isLoading)
+		return <LoadingPage />;
+	return(
 		<div className="App container-fluid">
 			<Header />
 			<BreadcrumbCustom/>
@@ -68,9 +70,7 @@ const App = () => {
 				</Container>
 			</div>
 		</div>
-	) : (
-		<LoadingPage />
-	);
+	)
 };
 
 export default App;

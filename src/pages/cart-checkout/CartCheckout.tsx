@@ -56,7 +56,7 @@ const CartCheckout: FC = () => {
 					</thead>
 					<tbody>
 						{cartList.map((item, i) => (
-							<tr key={i}>
+							<tr key={item.id}>
 								<td>
 									<img
 										alt="product image"
@@ -103,7 +103,7 @@ const CartCheckout: FC = () => {
 				<h3>TOTAL: {totalPrice}$</h3>
 				<button onClick={handleCheckout}>CHECK OUT HERE</button>
 				<Modal isOpen={modalState.modal} toggle={toggle} >
-          <ModalHeader toggle={toggle}>Checkout done.</ModalHeader>
+          <ModalHeader>Checkout done.</ModalHeader>
           <ModalBody>
             Yayy! Your cart is waiting for ship.
           </ModalBody>
