@@ -1,6 +1,6 @@
 export default interface ICollection {
 	title: string;
-	id: number;
+	id: string;
 	imageUrl: string;
 	routeName: string;
 }

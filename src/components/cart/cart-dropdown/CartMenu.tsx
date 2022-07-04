@@ -16,7 +16,7 @@ const CartdDropdown: FC = () => {
 			<div className="cart-list">
 				{itemList.length === 0?<div>
 						<p>You don't have any product in cart.</p>
-						<img className="cart-empty" src={cartEmpty}></img>
+						<img alt="empty" className="cart-empty" src={cartEmpty}></img>
 					</div>:<div>
 						{itemList.map((item) => <CartItem key={item.id} item={item} />)}
 						</div>}

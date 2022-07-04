@@ -1,27 +1,11 @@
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import Logo from '../../asserts/crown.svg';
-import { ggSignOut } from '../../firebase/firebase.utils';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { ReactSVG } from 'react-svg';
-import { clearCurrentUser, selectUser } from '../../redux/user/user.slice';
 import CartIcon from '../cart/cart-icon/CartIcon';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-//import { Navbar } from 'reactstrap';
-import userAva from '../../asserts/user.png';
 import SearchInput from '../search-input/SearchInput';
-import {
-	Button,
-	Col,
-	Container,
-	Form,
-	FormControl,
-	Modal,
-	Nav,
-	Navbar,
-	NavDropdown,
-	Row,
-} from 'react-bootstrap';
+import {Col,Container,Modal,Navbar,Row,} from 'react-bootstrap';
 import HeaderNav from '../nav/HeaderNav';
 
 const Header = () => {

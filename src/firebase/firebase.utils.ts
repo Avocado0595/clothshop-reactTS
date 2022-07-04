@@ -12,7 +12,7 @@ import {
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
 import IUser from '../redux/user/user.interface';
-import ICollection from '../interfaces/ICollection';
+import ICollection from '../redux/collection/collection.interface';
 import IProduct from '../interfaces/IProduct';
 
 const config = {

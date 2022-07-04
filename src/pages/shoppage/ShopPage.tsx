@@ -8,7 +8,7 @@ const ShopPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const collectionList = useAppSelector((state) => selectCollection(state));
 	useEffect(()=>{
-		if(collectionList){
+		if(!collectionList){
 			dispatch(getCollectionList());
 		}
 	},[dispatch])

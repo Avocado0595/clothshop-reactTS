@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Container } from 'react-bootstrap';
 import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getProductById } from '../../redux/product/product.api';
@@ -11,23 +11,15 @@ import './ProductDetail.scss';
 
 const ProductDetail = () => {
 	const dispatch = useAppDispatch();
-	const { id } = useParams();
-	const product = useAppSelector((state:RootState)=>selectCurrentProduct(state));
-	const {loading, errMessage} = useAppSelector((state:RootState)=>selectLoading(state));
+	const { productId:id, collection } = useParams();
+	//const product = useAppSelector((state:RootState)=>selectCurrentProduct(state));
+	const {currentProduct:product, isLoading} = useAppSelector((state:RootState)=>state.product);
 	useEffect(()=>{
 		dispatch(getProductById({id}))
 	},[dispatch])
-	// const product = useAppSelector((state) =>
-	// 	selectByProductId(state, productId ?? '')
-	// );
-	
-
-	//loading=true, err:'', product:null
-	if(loading)
+	if(isLoading)
 		return <LoadingPage/>;
-	//loading: false, err:'eqeqe'
-	if(errMessage != '')
-		return <h1>Product not found!</h1>
+
 	if (product)
 		return (
 			<Container className="product-detail flex-column flex-md-row flex-xl-row flex-lg-row">
@@ -53,7 +45,9 @@ const ProductDetail = () => {
 					</div>
 				</div>
 			</Container>
-		);
+		)
+		else
+		return <h1>Product not found.</h1>
 	
 	
 };

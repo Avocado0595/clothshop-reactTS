@@ -6,9 +6,8 @@ import Input from './Input';
 import './SignIn.scss';
 import initauth from '../../../firebase/firebase.utils';
 import Loading from '../../../components/loading-icon/Loading';
-import { Col } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function SignIn() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);

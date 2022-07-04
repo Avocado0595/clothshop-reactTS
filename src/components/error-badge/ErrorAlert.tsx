@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import './ErrorAlert.scss';
-import { Alert } from 'reactstrap';
+import { Alert } from 'react-bootstrap';
 const ErrorAlert: FC<{ message: string }> = ({ message }) => {
 	return (
-		<Alert fade={true} className="error-alert" color="danger">
+		<Alert className="error-alert" color="danger">
 			{message}
 		</Alert>
 	);

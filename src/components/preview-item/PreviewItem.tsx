@@ -1,15 +1,16 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactSVG } from 'react-svg';
-import { Col } from 'reactstrap';
+
+import { Col } from 'react-bootstrap';
 import IProduct from '../../interfaces/IProduct';
 import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch } from '../../redux/hooks';
 import './PreviewItem.scss';
-import addCartIcon from '../../asserts/add-cart.svg';
-const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
+
+const PreviewItem: FC<{ item: IProduct, collection: string }> = ({ item, collection }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	
 	return (
 		<Col className="preview-item" key={item.id}>
 			<div
@@ -18,7 +19,7 @@ const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 			>
 				<div
 					className="item-modal"
-					onClick={() => navigate(`/product/${item.id}`)}
+					onClick={() => navigate(`/${collection}/${item.id}`)}
 				></div>
 				<div
 					onClick={() => dispatch(addItem({ ...item, quantity: 0 }))}

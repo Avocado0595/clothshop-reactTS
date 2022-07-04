@@ -17,7 +17,7 @@ export default function GoogleButton() {
 			onClick={handleGoogleSignIn}
 			className="google-btn"
 		>
-			<img className="google-btn--logo" src={googleLogo} />
+			<img alt="google" className="google-btn--logo" src={googleLogo} />
 			Sign in with Google
 		</Button>
 		</Col>

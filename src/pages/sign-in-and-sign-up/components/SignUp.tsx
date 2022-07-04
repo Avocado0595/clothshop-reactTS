@@ -4,9 +4,9 @@ import Input from './Input';
 import './SignUp.scss';
 import { createUser } from '../../../firebase/firebase.utils';
 import './SignUp.scss';
-import { Col } from 'reactstrap';
+
 import Loading from '../../../components/loading-icon/Loading';
-import { Container } from 'react-bootstrap';
+import { Container,Col } from 'react-bootstrap';
 
 export default function SignUp() {
 	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);

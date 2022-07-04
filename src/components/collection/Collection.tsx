@@ -7,13 +7,12 @@ import { getCollectionList } from '../../redux/collection/collection.api';
 import { Row } from 'react-bootstrap';
 
 
-const Collection: FC = () => {
+const Collection = () => {
 	const collectionList = useAppSelector((state) => selectCollection(state));
-	
 	return (
 		<Row className="directory-menu row-cols-3 justify-content-center">
-			{collectionList.map((item) => (
-				<MenuItem key={item.id} item={item} />
+			{collectionList.map((item,idx) => (
+				<MenuItem key={idx} item={item} />
 			))}
 		</Row>
 	);

@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectUser } from '../../redux/user/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { createUserCart } from '../../firebase/firebase.utils';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 

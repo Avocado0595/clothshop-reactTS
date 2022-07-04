@@ -28,6 +28,7 @@ const HeaderNav = (props:{setShow:(p:boolean)=>void})=>{
         <NavDropdown
             title={
                 <img
+                alt="avatar"
                     className="avatar-icon"
                     src={
                         currentUser.photoURL ||

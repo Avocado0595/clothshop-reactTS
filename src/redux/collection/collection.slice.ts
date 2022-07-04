@@ -1,10 +1,11 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit';
-import ICollection from '../../interfaces/ICollection';
+import ICollection from './collection.interface';
 import type { RootState } from '../store';
-import { getCollectionList } from './collection.api';
+import { getCollectionById, getCollectionByTitle, getCollectionList } from './collection.api';
 
 export interface CollectionState {
 	collectionList: ICollection[],
+	currentCollection?:ICollection,
 	isLoading: boolean,
 	errMessage?:any
 }
@@ -32,6 +33,34 @@ export const collectionSlice = createSlice({
 		});
 	
 		builder.addCase(getCollectionList.rejected, (state, action) => {
+		state.isLoading = false;
+		state.errMessage = action.payload;
+		});
+		//////////
+		builder.addCase(getCollectionByTitle.pending, (state) => {
+			state.isLoading = true;
+		});
+	
+		builder.addCase(getCollectionByTitle.fulfilled, (state, action) => {
+		state.isLoading = false;
+		state.currentCollection = action.payload as ICollection;
+		});
+	
+		builder.addCase(getCollectionByTitle.rejected, (state, action) => {
+		state.isLoading = false;
+		state.errMessage = action.payload;
+		});
+		/////////
+		builder.addCase(getCollectionById.pending, (state) => {
+			state.isLoading = true;
+		});
+	
+		builder.addCase(getCollectionById.fulfilled, (state, action) => {
+		state.isLoading = false;
+		state.currentCollection = action.payload as ICollection;
+		});
+	
+		builder.addCase(getCollectionById.rejected, (state, action) => {
 		state.isLoading = false;
 		state.errMessage = action.payload;
 		});

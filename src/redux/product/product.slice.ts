@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import IProduct from '../../interfaces/IProduct';
-import { getProductById, getProductList } from './product.api';
+import { getProductBycollection, getProductById, getProductList } from './product.api';
 
 export interface ProductState {
 	productList: IProduct[];
@@ -35,7 +35,7 @@ export const productSlice = createSlice({
 		state.isLoading = false;
 		state.errMessage = action.payload;
 		});
-		///
+		/////////////////////////////
 		builder.addCase(getProductById.pending, (state) => {
 			state.isLoading = true;
 			});
@@ -49,6 +49,20 @@ export const productSlice = createSlice({
 		state.isLoading = false;
 		state.errMessage = action.payload;
 		});
+		//////////////////////////
+		builder.addCase(getProductBycollection.pending, (state) => {
+			state.isLoading = true;
+			});
+	
+		builder.addCase(getProductBycollection.fulfilled, (state, action) => {
+		state.isLoading = false;
+		state.productList = action.payload as IProduct[];
+		});
+	
+		builder.addCase(getProductBycollection.rejected, (state, action) => {
+		state.isLoading = false;
+		state.errMessage = action.payload;
+		});
 	}
 });
 
@@ -57,7 +71,7 @@ export const { getProduct, getProductFromApi } = productSlice.actions;
 export const selectProduct = (state: RootState) => state.product.productList;
 export const selectCurrentProduct = (state: RootState) => state.product.currentProduct;
 export const selectLoading = (state:RootState)=>({loading:state.product.isLoading, errMessage: state.product.errMessage});
-export const selectByCollection = (state: RootState, id: number) =>
+export const selectByCollection = (state: RootState, id: string) =>
 state.product.productList.filter((p) => p.collectionId === id);
 
 export const selectSearchProduct = (state: RootState, p: string) =>

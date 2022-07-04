@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Container, Row } from 'reactstrap';
+import { Container, Row } from 'react-bootstrap';
 import PreviewItem from '../../components/preview-item/PreviewItem';
 import { useAppSelector } from '../../redux/hooks';
 import { selectSearchProduct } from '../../redux/product/product.slice';
@@ -18,7 +18,7 @@ const Search: FC = () => {
 			</h4>
 			<Row xs="2" md="3" lg="4" className="preview">
 				{productSearchList.map((item) => (
-					<PreviewItem item={item} />
+					<PreviewItem  item={item} />
 				))}
 			</Row>
 		</Container>

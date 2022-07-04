@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { DropdownItem } from 'reactstrap';
+import { Dropdown } from 'react-bootstrap';
 import { ICartItem } from '../../../redux/cart/cart.slice';
 import './CartItem.scss';
 const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 	return (
-		<DropdownItem key={item.id}>
+		<Dropdown.Item key={item.id}>
 			<img
-				alt="item image"
+				alt="item"
 				className="cart-item-img"
 				src={item.imageUrl}
 			></img>
@@ -16,7 +16,7 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 					{item.quantity} &times; {item.price}$
 				</p>
 			</div>
-		</DropdownItem>
+		</Dropdown.Item>
 	);
 };
 
