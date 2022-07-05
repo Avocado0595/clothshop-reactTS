@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import CustomButton from '../../../components/custom-button/CustomButton';
 import Input from './Input';
-import './SignUp.scss';
 import { createUser } from '../../../firebase/firebase.utils';
-import './SignUp.scss';
-
-import Loading from '../../../components/loading-icon/Loading';
 import { Container,Col } from 'react-bootstrap';
 
-export default function SignUp() {
-	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
+
+export default function SignUp(props:{
+	handleChangeForm:(e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>void,
+	handleLoading:(e:boolean)=>void}) {
+	const {handleChangeForm, handleLoading} = props;
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		setIsLoadingState(true);
+		handleLoading(true);
 		const target = e.target as typeof e.target & {
 			name: { value: string };
 			emailSignUp: { value: string };
@@ -35,24 +34,19 @@ export default function SignUp() {
 				setErrMessage({ email: 'Already exist email.' });
 			}
 			if ((e as Error).message.toLowerCase().includes('password')) {
-				setErrMessage({ password: 'Invalid password.' });
+				setErrMessage({ password: 'Your password is so weak.' });
 			}
 			if ((e as Error).message.toLowerCase().includes('confirmation')) {
-				setErrMessage({ confirmPassword: (e as Error).message });
+				setErrMessage({ confirmPassword: (e as Error).message});
 			}
 		}
-		setIsLoadingState(false);
+		handleLoading(false);
 	};
 
 	return (
-		<Col className="sign-up">
-			{isLoadingState ? (
-				<div className="loading-modal">
-					<Loading />
-				</div>
-			) : null}
-			<h4>If you don't have any account</h4>
-			<span>Sign up with your email and password here.</span>
+		<Col className="signform">
+			<h4>SIGN UP</h4>
+			<span>If you aldready have an account, <a onClick={e=>handleChangeForm(e)} href='#'>sign in here.</a></span>
 			<form onSubmit={handleSubmit}>
 				<Input
 					label="Display name"

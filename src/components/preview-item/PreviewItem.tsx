@@ -13,10 +13,8 @@ const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 	
 	return (
 		<Col className="preview-item" key={item.id}>
-			<div
-				className="item-img"
-				style={{ backgroundImage: `url(${item.imageUrl})` }}
-			>
+			<div className="item-layout">
+				<img onClick={() => navigate(`/${item.collectionId}/${item.id}`)} className="item-img" src={item.imageUrl}/>
 				<div
 					className="item-modal"
 					onClick={() => navigate(`/${item.collectionId}/${item.id}`)}
@@ -29,7 +27,7 @@ const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 				</div>
 			</div>
 			<div className="item-info">
-				<div className="item-info--name">{item.name}</div>
+				<p className="item-info--name">{item.name}</p>
 				<div className="item-info--price">${item.price}</div>
 			</div>
 		</Col>

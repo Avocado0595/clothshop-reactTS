@@ -37,8 +37,8 @@ const SearchInput = () => {
 		else setResultList([]);
 	};
 	const clearSearch = ()=>{
-		setResultList([]);
 		setValue('');
+		setResultList([]);
 	}
 
 	return (<InputGroup className="mt-1 w-100">
@@ -50,15 +50,16 @@ const SearchInput = () => {
     aria-describedby="search"
 	onChange={handleOnChange}
 	onKeyDown={handleOnEnter}
+	value={value}
     />
-	<InputGroup.Text id="search"><img className="search-icon" src={searchIcon} /></InputGroup.Text>
+	<InputGroup.Text onClick={handleSearchClick} id="search"><img className="search-icon" src={searchIcon} /></InputGroup.Text>
 	
 	{resultList.length != 0 ? (
 				<Dropdown.Menu className="search-dropdown show">
 					{resultList.map((i, idx) => (
-						<Dropdown.Item onClick={()=>clearSearch()}>
-							<Link className='d-block w-100' key={idx} to={`/${i.collectionId}/${i.id}`}>{i.name}</Link>
-						</Dropdown.Item>
+						
+							<Link onClick={()=>clearSearch()} className='d-block w-100' key={idx} to={`/${i.collectionId}/${i.id}`}>{i.name}</Link>
+						
 					))}
 				</Dropdown.Menu>) : null} 
   </InputGroup>)

@@ -16,11 +16,12 @@ const Search= () => {
 			<h4 className="title">
 				Search result for: {searchParams.get('p')}
 			</h4>
+			{productSearchList.length>0?
 			<Row xs="2" md="3" lg="4" className="preview">
 				{productSearchList.map((item) => (
 					<PreviewItem  item={item} />
 				))}
-			</Row>
+			</Row>:<p>Sorry! We got nothing with your keywords.</p>}
 		</Container>
 	);
 };

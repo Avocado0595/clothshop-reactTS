@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 import CustomButton from '../../../components/custom-button/CustomButton';
 import GoogleButton from '../../../components/custom-button/GoogleButton';
 import Input from './Input';
-import './SignIn.scss';
 import initauth from '../../../firebase/firebase.utils';
-import Loading from '../../../components/loading-icon/Loading';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-export default function SignIn() {
-	const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
+export default function SignIn(props:{
+	handleChangeForm:(e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>void,
+	handleLoading:(e:boolean)=>void}) {
+	const {handleChangeForm, handleLoading} = props;
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
 	const navigate = useNavigate();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		setIsLoadingState(true);
+		handleLoading(true);
 		const target = e.target as typeof e.target & {
 			email: { value: string };
 			password: { value: string };
@@ -33,18 +33,14 @@ export default function SignIn() {
 			}
 		}
 		navigate(-1);
-		setIsLoadingState(false);
+		handleLoading(false);
 	};
 
 	return (
-		<Col className="sign-in">
-			{isLoadingState ? (
-				<div className="loading-modal">
-					<Loading />
-				</div>
-			) : null}
-			<h4>If you already had an account</h4>
-			<span>Sign in with your email and password here.</span>
+		<Col className="signform">
+		
+			<h4>SIGN IN</h4>
+			<span>If you don't have any account, <a onClick={(e)=>handleChangeForm(e)} href='#'>sign up here.</a></span>
 			<form
 				onSubmit={handleSubmit}
 				onChange={() => setErrMessage(undefined)}

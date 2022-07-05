@@ -1,8 +1,24 @@
-.signin-and-signup{
-	padding-bottom: 32px;
+.authform-outline{
+	max-width: 640px !important;
+	margin:auto;
+	.signform{
+		padding: 16px 64px;
+	border-radius: 5px;
+	min-width: 500px;
+	font-size: 15px;
+	text-align: left;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	}
 }
-.breaker {
-	display: none;
+
+.loading-modal {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.578);
 }
 @media (max-width: 992px) and (min-width: 480px) {
 	

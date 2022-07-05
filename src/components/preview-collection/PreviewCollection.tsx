@@ -19,7 +19,7 @@ const PreviewCollection: FC<{
 	if(productList)
 		return (
 			<Container className="collection-preview">
-				<h2 className="title">{title.toUpperCase()}</h2>
+				<h2 className="title">{title.toUpperCase()} COLLECTION</h2>
 				<Row xs="2" md="3" lg="4" className="preview">
 					{productList.map((item) => (
 						<PreviewItem key={item.id} item={item} />

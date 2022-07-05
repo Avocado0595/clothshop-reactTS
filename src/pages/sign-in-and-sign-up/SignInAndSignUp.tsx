@@ -1,19 +1,26 @@
-import { Container, Row } from 'react-bootstrap';
+import { useState } from 'react';
+import LoadingPage from '../loading-page/LoadingPage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import './SignInAndSignUp.scss';
 
 export default function SignInAndSignUp() {
-
+	const [isLogin, setIsLogin] = useState<boolean>(true);
+	const [isLoading, setLoading] = useState<boolean>(false);
+	const handleChangeForm = (e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>{
+		e.preventDefault();
+		setIsLogin(!isLogin)
+	}
+	const handleLoading = (isLoading:boolean)=>{
+		setLoading(isLoading);
+	}
 	return (
-		<Container className="signin-and-signup">
-			<Row lg="2" sm="1">
-				<SignIn/>
-				<div className="breaker">
-					<p>OR</p>
-				</div>
-				<SignUp />
-			</Row>
-		</Container>
+		<div className="signin-and-signup authform-outline">
+			{isLogin?<SignIn handleLoading={handleLoading} handleChangeForm={handleChangeForm}/>:
+			<SignUp handleLoading={handleLoading} handleChangeForm={handleChangeForm}/>}
+			{isLoading?<div className="loading-modal">
+					<LoadingPage />
+				</div>:null}
+		</div>
 	);
 }

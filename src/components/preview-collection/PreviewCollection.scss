@@ -1,9 +1,10 @@
-$gap: 16px;
+
 .collection-preview {
 	.title {
 		text-align: left;
-		margin-left: $gap;
-		margin-bottom: 0px;
+		margin-left: 0px;
+		margin-bottom: 16px;
+		font-weight: 800;
 	}
 	.preview {
 		width: 100%;

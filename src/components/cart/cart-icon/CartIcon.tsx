@@ -18,8 +18,8 @@ const CartIcon: FC = () => {
 
 	return (
 		<Dropdown>
-        <Dropdown.Toggle>
-			<div className="cart-count">{numberOfItem}</div>
+        <Dropdown.Toggle style={{backgroundColor: 'unset', border:'none', outline:'none', boxShadow:'none'}}>
+			<div className="cart-count"><span className='d-block'>{numberOfItem}</span></div>
 			<img alt="cart" className="cart-icon" src={cartIcon} />
         </Dropdown.Toggle>
 		<CartMenu/>

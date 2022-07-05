@@ -63,12 +63,11 @@ const App = () => {
 	return(
 		<div className="App container-fluid">
 			<Header />
-			<BreadcrumbCustom/>
-			<div className="container-fluid">
-				<Container>
+			<Container>
+				<BreadcrumbCustom/>
 				<AppRoute/>
-				</Container>
-			</div>
+			</Container>
+			
 		</div>
 	)
 };
