@@ -58,7 +58,7 @@ const Header = () => {
 				
 			>
 				<Modal.Header closeButton>
-					<Modal.Title><Link to="/">HOME</Link></Modal.Title>
+					<Modal.Title><Link onClick={() => setShow(false)} to="/">HOME</Link></Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 				<HeaderNav setShow={setShow}/>

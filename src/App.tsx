@@ -22,7 +22,7 @@ function AppRoute(){
     return(
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="/product" element={<ShopPage />} />
+                <Route path="/shop" element={<ShopPage />} />
                 <Route path="/contact" element={<h4>Contact here!</h4>} />
                 <Route path="/:collection" element={<Collection />} />
                 <Route path="/checkout" element={<CartCheckout />} />

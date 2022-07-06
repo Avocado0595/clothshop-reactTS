@@ -10,18 +10,19 @@ const HeaderNav = (props:{setShow:(p:boolean)=>void})=>{
     const handleSignOut = async () => {
 		await ggSignOut();
 		dispatch(clearCurrentUser());
+        props.setShow(false)
 	};
 
-    return (<Nav onClick={()=>props.setShow(false)}>
-    <Link className="header-item" to="shop">
+    return (<Nav>
+    <Link onClick={()=>props.setShow(false)} className="header-item" to="shop">
         SHOP
     </Link>
-    <Link className="header-item" to="contact">
+    <Link onClick={()=>props.setShow(false)} className="header-item" to="contact">
         CONTACT
     </Link>
 
     {!currentUser ? (
-        <Link className="header-item" to="/signin">
+        <Link onClick={()=>props.setShow(false)} className="header-item" to="/signin">
             SIGN IN
         </Link>
     ) : (
