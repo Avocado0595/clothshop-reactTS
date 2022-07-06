@@ -61,7 +61,8 @@ export const createUserProfile = async (user: IUser) => {
 
 export const createUserCart = async (userUid: string, cartList: { id: string, name: string, price: number, quantity: number }[]) => {
 	try {
-		const userCartRef = doc(collection(db, `userCart`));
+		
+		const userCartRef = doc(collection(db, 'userCart'));
 		await setDoc(userCartRef, {
 			userUid: userUid,
 			productList: [...cartList]

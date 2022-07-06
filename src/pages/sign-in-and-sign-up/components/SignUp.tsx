@@ -45,7 +45,7 @@ export default function SignUp(props:{
 
 	return (
 		<Col className="signform">
-			<h4>SIGN UP</h4>
+			<h4 className='form-title'>SIGN UP</h4>
 			<span>If you aldready have an account, <a onClick={e=>handleChangeForm(e)} href='#'>sign in here.</a></span>
 			<form onSubmit={handleSubmit}>
 				<Input

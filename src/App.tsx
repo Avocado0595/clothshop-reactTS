@@ -17,13 +17,15 @@ import { getProductList } from './redux/product/product.api';
 import './App.scss';
 import BreadcrumbCustom from './components/breadcrumb/BreadcrumbCustom';
 import { Container } from 'react-bootstrap';
+
+import Contact from './pages/contact/Contact';
 function AppRoute(){
     const currentUser = useAppSelector((state) => selectUser(state));
     return(
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/shop" element={<ShopPage />} />
-                <Route path="/contact" element={<h4>Contact here!</h4>} />
+                <Route path="/contact" element={<Contact/>} />
                 <Route path="/:collection" element={<Collection />} />
                 <Route path="/checkout" element={<CartCheckout />} />
                 <Route path="/search" element={<Search />} />
@@ -67,7 +69,6 @@ const App = () => {
 				<BreadcrumbCustom/>
 				<AppRoute/>
 			</Container>
-			
 		</div>
 	)
 };

@@ -4,9 +4,10 @@ import IProduct from '../../interfaces/IProduct';
 import { getProductBycollection, getProductById, getProductList } from './product.api';
 
 export interface ProductState {
-	productList: IProduct[];
-	currentProduct?: IProduct;
-	isLoading: boolean;
+	productList: IProduct[],
+	productListByCollection?: IProduct[],
+	currentProduct?: IProduct,
+	isLoading: boolean,
 	errMessage?: any
 }
 
@@ -56,7 +57,7 @@ export const productSlice = createSlice({
 	
 		builder.addCase(getProductBycollection.fulfilled, (state, action) => {
 		state.isLoading = false;
-		state.productList = action.payload as IProduct[];
+		state.productListByCollection = action.payload as IProduct[];
 		});
 	
 		builder.addCase(getProductBycollection.rejected, (state, action) => {
@@ -68,11 +69,10 @@ export const productSlice = createSlice({
 
 export const { getProduct, getProductFromApi } = productSlice.actions;
 
-export const selectProduct = (state: RootState) => state.product.productList;
+export const selectProductList = (state: RootState) => state.product.productList;
 export const selectCurrentProduct = (state: RootState) => state.product.currentProduct;
-export const selectLoading = (state:RootState)=>({loading:state.product.isLoading, errMessage: state.product.errMessage});
-export const selectByCollection = (state: RootState, id: string) =>
-state.product.productList.filter((p) => p.collectionId === id);
+//export const selectLoading = (state:RootState)=>({loading:state.product.isLoading, errMessage: state.product.errMessage});
+export const selectProductByCollection = (state: RootState) =>state.product.productListByCollection;
 
 export const selectSearchProduct = (state: RootState, p: string) =>
 	state.product.productList.filter((i) =>

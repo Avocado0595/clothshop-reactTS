@@ -57,5 +57,7 @@
 }
 
 @media screen and (max-width: 520px) {
-	
+	.search-dropdown{
+		display: none !important;
+	}
 }

@@ -15,7 +15,9 @@ const Header = () => {
 	const handleShow = () => {
 		setShow(true);
 	};
-
+	const handleHide = ()=>{
+		setShow(false);
+	}
 	return (
 		<Navbar className="header-nav" bg="light" expand="lg" fixed="top">
 			<Container className="flex-column">
@@ -62,7 +64,7 @@ const Header = () => {
 				</Modal.Header>
 				<Modal.Body>
 				<HeaderNav setShow={setShow}/>
-							<SearchInput />
+							<SearchInput handleHide={handleHide}/>
 				</Modal.Body>
 			</Modal>
 		</Navbar>

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import './CartIcon.scss';
-import cartIcon from '../../../asserts/shopping-cart.png';
+import cartIcon from '../../../asserts/shopping-cart.svg';
 import { selectCartList } from '../../../redux/cart/cart.slice';
 
 import { useAppSelector } from '../../../redux/hooks';

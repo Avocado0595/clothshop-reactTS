@@ -39,7 +39,7 @@ export default function SignIn(props:{
 	return (
 		<Col className="signform">
 		
-			<h4>SIGN IN</h4>
+			<h4 className='form-title'>SIGN IN</h4>
 			<span>If you don't have any account, <a onClick={(e)=>handleChangeForm(e)} href='#'>sign up here.</a></span>
 			<form
 				onSubmit={handleSubmit}

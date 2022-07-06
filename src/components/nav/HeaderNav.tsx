@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 import { ggSignOut } from "../../firebase/firebase.utils";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { clearCurrentUser, selectUser } from "../../redux/user/user.slice";
-import userDefaultAva from '../../asserts/user.png'
+import userDefaultAva from '../../asserts/user.svg'
+import './HeaderNav.scss';
 const HeaderNav = (props:{setShow:(p:boolean)=>void})=>{
     const currentUser = useAppSelector((state) => selectUser(state));
     const dispatch = useAppDispatch();

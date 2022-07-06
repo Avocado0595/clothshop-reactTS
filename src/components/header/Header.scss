@@ -69,22 +69,11 @@ $background-color: #f7f5f2;
 .navbar-toggler:focus{
 	box-shadow: unset !important;
 } 
-.avatar-icon {
-	width: 30px;
-	margin-right: 8px;
-}
+
 .dropdown-toggle::after {
 	display: none !important; 
   }
-  .header-item {
-	text-decoration: none;
-	color: black;
-	margin: 0 8px;
-	font-size: 1.25rem;
-	&:hover{
-		color: #0a58ca;
-	}
-}
+
 @media screen and (max-width: 980px) {
 	.header {
 		.header-menu {

@@ -14,7 +14,7 @@ export const getCollectionList = createAsyncThunk(
       }
       const a:ICollection[] = jsonData.documents.map((i:any)=>({
         title: i.fields.title.stringValue,
-        id:i.fields.name, 
+        id: i.fields.routeName.stringValue, 
         routeName: i.fields.routeName.stringValue,
         imageUrl: i.fields.imageUrl.stringValue}));
       return a;

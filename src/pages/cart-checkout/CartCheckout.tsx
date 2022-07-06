@@ -17,6 +17,7 @@ import { createUserCart } from '../../firebase/firebase.utils';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
+import CustomButton from '../../components/custom-button/CustomButton';
 
 const CartCheckout: FC = () => {
 	const cartList = useAppSelector((state) => selectCartList(state));
@@ -36,8 +37,8 @@ const CartCheckout: FC = () => {
 			navigate('/signin');
 		}
 		else{
-			await createUserCart(user.uid, cartList.map((c)=>({id: c.id, name: c.name, price: c.price, quantity:c.quantity})))
 			toggle();
+			await createUserCart(user.uid, cartList.map((c)=>({id: c.id, name: c.name, price: c.price, quantity:c.quantity})))
 		}
 	}
 	if (cartList.length !== 0)
@@ -100,9 +101,9 @@ const CartCheckout: FC = () => {
 						))}
 					</tbody>
 				</Table>
-				<h3>TOTAL: {totalPrice}$</h3>
-				<button onClick={handleCheckout}>CHECK OUT HERE</button>
-				<Modal isOpen={modalState.modal} toggle={toggle} >
+				<h3>Total: {totalPrice}$</h3>
+				<Button onClick={handleCheckout}>Checkout here</Button>
+				<Modal show={modalState.modal} >
           <ModalHeader>Checkout done.</ModalHeader>
           <ModalBody>
             Yayy! Your cart is waiting for ship.

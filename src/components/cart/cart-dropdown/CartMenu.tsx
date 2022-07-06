@@ -2,7 +2,7 @@ import { FC } from 'react';
 import CartItem from '../cart-item/CartItem';
 import './CartMenu.scss';
 import { useNavigate } from 'react-router-dom';
-import cartEmpty from '../../../asserts/empty-cart.png';
+import cartEmpty from '../../../asserts/empty-cart.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { Dropdown } from 'react-bootstrap';
 const CartdDropdown: FC = () => {

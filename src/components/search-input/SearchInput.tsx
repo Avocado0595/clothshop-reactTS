@@ -5,7 +5,8 @@ import searchIcon from '../../asserts/search.png';
 import { useAppSelector } from '../../redux/hooks';
 import { selectListProductName } from '../../redux/product/product.slice';
 import './SearchInput.scss';
-const SearchInput = () => {
+const SearchInput = (props:{handleHide:(a:boolean)=>void}) => {
+	const {handleHide} = props;
 	const [value, setValue] = useState<string>('');
 	const [resultList, setResultList] = useState<
 		Array<{ id: string; name: string , collectionId: string}>
@@ -20,6 +21,7 @@ const SearchInput = () => {
 			setResultList([]);
 			navigate(`/search?p=${value.trim()}`);
 		}
+		handleHide();
 	};
 	const handleOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {

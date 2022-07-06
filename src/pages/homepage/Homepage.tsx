@@ -8,10 +8,8 @@ const Collection = lazy(()=>import('../../components/collection/Collection'))
 export default function Homepage() {
 	const dispatch = useAppDispatch();
 	const collectionList = useAppSelector((state:RootState)=>state.collection.collectionList)
-	useEffect(()=>{
-		if(!collectionList.length)
-			dispatch(getCollectionList());
-	},[dispatch])
+	if(!collectionList.length)
+		dispatch(getCollectionList());
 	return (
 		<Suspense fallback={<LoadingPage/>}>
 		<div className="homepage">

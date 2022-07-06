@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import { addItem } from '../../redux/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getProductById } from '../../redux/product/product.api';
-import { selectCurrentProduct, selectLoading } from '../../redux/product/product.slice';
+//import { selectCurrentProduct, selectLoading } from '../../redux/product/product.slice';
 import { RootState } from '../../redux/store';
 import LoadingPage from '../loading-page/LoadingPage';
 import './ProductDetail.scss';

@@ -2,7 +2,7 @@
 import './GoogleButton.scss';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import initauth from '../../firebase/firebase.utils';
-import googleLogo from '../../asserts/google.png';
+import googleLogo from '../../asserts/google.svg';
 import { Button, Col } from 'react-bootstrap';
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });

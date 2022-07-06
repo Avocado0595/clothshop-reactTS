@@ -7,7 +7,11 @@
 	min-width: 500px;
 	font-size: 15px;
 	text-align: left;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+	.form-title{
+		text-align: center;
+		font-weight: bold;
+	}
 	}
 }
 
@@ -20,26 +24,15 @@
 	height: 100%;
 	background-color: rgba(255, 255, 255, 0.578);
 }
-@media (max-width: 992px) and (min-width: 480px) {
-	
-	.breaker {
-		padding: 30px 0 !important;
-		display: block;
-		position: relative;
-		&::after {
-			content: '';
-			border-bottom: 1px solid rgb(128, 128, 128);
-			position: absolute;
-			top: 50%;
-			left: 0;
-			width: 100%;
-			z-index: -1;
-		}
-		p {
-			width: fit-content;
-			margin: auto !important;
-			background-color: white;
-			padding: 0 4px;
+@media (max-width: 768px){
+	.authform-outline{
+		max-width: 90% !important;
+		.signform{
+			padding: 8px 8px;
+		min-width: 300px;
+		font-size: 14px;
+		
 		}
 	}
+	
 }
