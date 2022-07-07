@@ -1,17 +1,13 @@
 import { Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ggSignOut } from '../../firebase/firebase.utils';
-import { useAppDispatch } from '../../redux/hooks';
-import { clearCurrentUser } from '../../redux/user/user.slice';
 import userDefaultAva from '../../asserts/user.svg';
 import './HeaderNav.scss';
 import { getAuth } from 'firebase/auth';
 const HeaderNav = (props: { setShow: (p: boolean) => void }) => {
 	const currentUser = getAuth().currentUser;
-	const dispatch = useAppDispatch();
 	const handleSignOut = async () => {
 		await ggSignOut();
-		dispatch(clearCurrentUser());
 		props.setShow(false);
 	};
 

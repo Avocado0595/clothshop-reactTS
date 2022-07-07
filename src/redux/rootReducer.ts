@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import collectionSlice from './collection/collection.slice';
-import userSlice from './user/user.slice';
 import productSlice from './product/product.slice';
 import cartSlice from './cart/cart.slice';
 
@@ -14,7 +13,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-	user: userSlice,
 	collection: collectionSlice,
 	product: productSlice,
 	cart: cartSlice,

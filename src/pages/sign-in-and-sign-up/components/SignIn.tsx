@@ -6,15 +6,12 @@ import Input from './Input';
 import initauth from '../../../firebase/firebase.utils';
 import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
-import { useAppDispatch } from '../../../redux/hooks';
-import { setCurrentUser } from '../../../redux/user/user.slice';
 
 export default function SignIn(props: {
 	handleChangeForm: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 	handleLoading: (e: boolean) => void;
 }) {
 	const { handleChangeForm, handleLoading } = props;
-	const dispatch = useAppDispatch();
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
 	const navigate = useNavigate();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -27,20 +24,8 @@ export default function SignIn(props: {
 		const email = target.email.value; // typechecks!
 		const password = target.password.value; // typechecks!
 		try {
-			const userCredential = await signInWithEmailAndPassword(
-				initauth,
-				email,
-				password
-			);
-			const user = userCredential.user;
-			dispatch(
-				setCurrentUser({
-					uid: user.uid,
-					displayName: user.displayName || '',
-					email: user.email || '',
-					photoURL: user.photoURL || '',
-				})
-			);
+			await signInWithEmailAndPassword(initauth, email, password);
+
 			navigate(-1);
 		} catch (e) {
 			if ((e as Error).message.includes('user')) {
