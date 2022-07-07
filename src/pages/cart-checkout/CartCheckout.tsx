@@ -22,6 +22,7 @@ import {
 import { Table } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { getAuth } from 'firebase/auth';
+import { useState } from 'react';
 
 const CartCheckout = () => {
 	const cartList = useAppSelector((state) => selectCartList(state));
