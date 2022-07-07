@@ -6,7 +6,7 @@
 tr {
 	border-bottom: 1px solid #ddd;
 }
-td{
+td {
 	vertical-align: middle;
 }
 
@@ -69,7 +69,7 @@ td{
 }
 
 @media screen and (max-width: 768px) {
-	table{
+	table {
 		font-size: 13px;
 	}
 	.product-img {
@@ -83,7 +83,6 @@ td{
 		}
 	}
 	.icon-trash {
-	
 		width: 16px;
 		margin: auto;
 		div {
@@ -93,5 +92,4 @@ td{
 			}
 		}
 	}
-	
 }

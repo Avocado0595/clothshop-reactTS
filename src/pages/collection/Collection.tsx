@@ -11,17 +11,22 @@ import LoadingPage from '../loading-page/LoadingPage';
 
 const Collection = () => {
 	const dispatch = useAppDispatch();
-	const { collection:title } = useParams();
-	const {isLoading, currentCollection} = useAppSelector((state) => state.collection);
-	const productListByCollection = useAppSelector((state: RootState)=>selectProductByCollection(state));
-
-		if(!currentCollection || currentCollection.title !== title){
-			dispatch(getCollectionByTitle({title}));
-			dispatch(getProductBycollection({collectionId:currentCollection?.id}))
+	const { collection: title } = useParams();
+	const { isLoading, currentCollection } = useAppSelector(
+		(state) => state.collection
+	);
+	const productListByCollection = useAppSelector((state: RootState) =>
+		selectProductByCollection(state)
+	);
+	useEffect(() => {
+		if (!currentCollection || currentCollection.title !== title) {
+			dispatch(getCollectionByTitle({ title }));
+			dispatch(
+				getProductBycollection({ collectionId: currentCollection?.id })
+			);
 		}
-
-	if(isLoading)
-		return <LoadingPage/>
+	}, [dispatch]);
+	if (isLoading) return <LoadingPage />;
 
 	if (currentCollection)
 		return (

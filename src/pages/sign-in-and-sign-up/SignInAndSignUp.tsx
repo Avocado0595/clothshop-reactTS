@@ -7,20 +7,31 @@ import './SignInAndSignUp.scss';
 export default function SignInAndSignUp() {
 	const [isLogin, setIsLogin] = useState<boolean>(true);
 	const [isLoading, setLoading] = useState<boolean>(false);
-	const handleChangeForm = (e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>{
+	const handleChangeForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
-		setIsLogin(!isLogin)
-	}
-	const handleLoading = (isLoading:boolean)=>{
+		setIsLogin(!isLogin);
+	};
+	const handleLoading = (isLoading: boolean) => {
 		setLoading(isLoading);
-	}
+	};
 	return (
 		<div className="signin-and-signup authform-outline">
-			{isLogin?<SignIn handleLoading={handleLoading} handleChangeForm={handleChangeForm}/>:
-			<SignUp handleLoading={handleLoading} handleChangeForm={handleChangeForm}/>}
-			{isLoading?<div className="loading-modal">
+			{isLogin ? (
+				<SignIn
+					handleLoading={handleLoading}
+					handleChangeForm={handleChangeForm}
+				/>
+			) : (
+				<SignUp
+					handleLoading={handleLoading}
+					handleChangeForm={handleChangeForm}
+				/>
+			)}
+			{isLoading ? (
+				<div className="loading-modal">
 					<LoadingPage />
-				</div>:null}
+				</div>
+			) : null}
 		</div>
 	);
 }

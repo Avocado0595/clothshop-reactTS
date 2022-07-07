@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where, writeBatch } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	getDoc,
+	getFirestore,
+	setDoc,
+} from 'firebase/firestore';
 
 import {
 	createUserWithEmailAndPassword,
@@ -12,8 +18,6 @@ import {
 } from 'firebase/auth';
 import IAccount from '../interfaces/IAccount';
 import IUser from '../redux/user/user.interface';
-import ICollection from '../redux/collection/collection.interface';
-import IProduct from '../interfaces/IProduct';
 
 const config = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
@@ -52,40 +56,36 @@ export const createUserProfile = async (user: IUser) => {
 			await setDoc(userRef, {
 				displayName: user.displayName,
 				email: user.email,
-				createdAt: new Date()
+				createdAt: new Date(),
 			});
 	} catch (e) {
 		console.error('Error adding document: ', e);
 	}
 };
 
-export const createUserCart = async (userUid: string, cartList: { id: string, name: string, price: number, quantity: number }[]) => {
+export const createUserCart = async (
+	userUid: string,
+	cartList: { id: string; name: string; price: number; quantity: number }[]
+) => {
 	try {
-		
 		const userCartRef = doc(collection(db, 'userCart'));
 		await setDoc(userCartRef, {
 			userUid: userUid,
-			productList: [...cartList]
+			productList: [...cartList],
 		});
-	}
-	catch (e) {
+	} catch (e) {
 		console.error('Error adding cart: ', e);
 	}
-}
-
-
+};
 
 export const setPersistenceFirebase = () => {
-	setPersistence(
-		auth,
-		browserSessionPersistence
-	)
-	.then(() => {
-		return null;
-	})
-	.catch((error) => {
-		console.log(error);
-	});
-}
+	setPersistence(auth, browserSessionPersistence)
+		.then(() => {
+			return null;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+};
 
 export default initauth;

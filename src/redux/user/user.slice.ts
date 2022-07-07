@@ -3,14 +3,14 @@ import IUser from './user.interface';
 import type { RootState } from '../../redux/store';
 
 export interface UserState {
-	currentUser: IUser | null,
-	isLoading: boolean,
-	errMessage?: string
+	currentUser: IUser | null;
+	isLoading: boolean;
+	errMessage?: string;
 }
 
 const initialState: UserState = {
 	currentUser: null,
-	isLoading: false
+	isLoading: false,
 };
 
 export const userSlice = createSlice({

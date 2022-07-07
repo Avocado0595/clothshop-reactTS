@@ -10,11 +10,15 @@ import './PreviewItem.scss';
 const PreviewItem: FC<{ item: IProduct }> = ({ item }) => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	
+
 	return (
 		<Col className="preview-item" key={item.id}>
 			<div className="item-layout">
-				<img onClick={() => navigate(`/${item.collectionId}/${item.id}`)} className="item-img" src={item.imageUrl}/>
+				<img
+					onClick={() => navigate(`/${item.collectionId}/${item.id}`)}
+					className="item-img"
+					src={item.imageUrl}
+				/>
 				<div
 					className="item-modal"
 					onClick={() => navigate(`/${item.collectionId}/${item.id}`)}

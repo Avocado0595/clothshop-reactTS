@@ -1,26 +1,24 @@
 .avatar-icon {
 	width: 30px;
 	margin-right: 8px;
-        border-radius: 50%;
+	border-radius: 50%;
 }
-  .header-item {
+.header-item {
 	text-decoration: none;
 	color: black;
 	margin: 0 8px;
 	font-size: 1.25rem;
-	&:hover{
+	&:hover {
 		color: #0a58ca;
 	}
 }
-.navbar-nav{
-     a{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-     }
+.navbar-nav {
+	a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
-#basic-nav-dropdown{
-    
-        padding:0 8px;
-
+#basic-nav-dropdown {
+	padding: 0 8px;
 }

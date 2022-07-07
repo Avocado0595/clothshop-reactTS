@@ -10,8 +10,8 @@ const persistConfig = {
 	key: 'root',
 	version: 1,
 	storage,
-	whitelist: ['cart']
-}
+	whitelist: ['cart'],
+};
 
 const rootReducer = combineReducers({
 	user: userSlice,
@@ -19,5 +19,5 @@ const rootReducer = combineReducers({
 	product: productSlice,
 	cart: cartSlice,
 });
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default persistedReducer;

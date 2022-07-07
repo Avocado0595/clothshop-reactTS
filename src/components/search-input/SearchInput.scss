@@ -1,5 +1,4 @@
-
-/// 
+///
 .search-dropdown {
 	z-index: 999;
 	position: absolute;
@@ -27,37 +26,36 @@
 	cursor: pointer;
 	margin: auto;
 	padding-right: 12px;
-	
 }
 .search-icon {
 	width: 20px;
 }
-.form-control{
+.form-control {
 	border-top-left-radius: 30px !important;
 	border-bottom-left-radius: 30px !important;
-	&:focus, &:active {
+	&:focus,
+	&:active {
 		color: #212529;
 		outline: 0;
-		 box-shadow: none !important;
-		 overflow: hidden;
+		box-shadow: none !important;
+		overflow: hidden;
 	}
 }
 
-.input-group{
+.input-group {
 	border-radius: 16px !important;
 	width: unset !important;
-	
 }
-.input-group-text{
+.input-group-text {
 	border-top-right-radius: 30px !important;
 	border-bottom-right-radius: 30px !important;
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
 }
 
 @media screen and (max-width: 520px) {
-	.search-dropdown{
+	.search-dropdown {
 		display: none !important;
 	}
 }
