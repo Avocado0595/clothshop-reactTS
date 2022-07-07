@@ -1,25 +1,27 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import LoadingPage from '../../pages/loading-page/LoadingPage';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import IProduct from '../../interfaces/IProduct';
+import { useAppDispatch } from '../../redux/hooks';
 import { getProductBycollection } from '../../redux/product/product.api';
 import PreviewItem from '../preview-item/PreviewItem';
 import './PreviewCollection.scss';
-const PreviewCollection: FC<{
+const PreviewCollection = (props: {
 	title: string;
 	collectionId: string;
-}> = ({ title, collectionId }) => {
+	productList: IProduct[];
+}) => {
+	const { title, collectionId, productList } = props;
 	const dispatch = useAppDispatch();
-	const {productList, isLoading} = useAppSelector((state) =>state.product);
-	useEffect(()=>{
-		dispatch(getProductBycollection({collectionId}))
-	},[dispatch])
-	if(isLoading)
-		return <LoadingPage/>
-	if(productList)
+	useEffect(() => {
+		dispatch(getProductBycollection({ collectionId }));
+	}, [dispatch]);
+
+	if (productList)
 		return (
-			<Container className="collection-preview">
-				<h2 className="title">{title.toUpperCase()} COLLECTION</h2>
+			<Container key={collectionId} className="collection-preview">
+				<h2 className="title">
+					{title[0].toUpperCase() + title.slice(1)} collection
+				</h2>
 				<Row xs="2" md="3" lg="4" className="preview">
 					{productList.map((item) => (
 						<PreviewItem key={item.id} item={item} />
@@ -27,9 +29,7 @@ const PreviewCollection: FC<{
 				</Row>
 			</Container>
 		);
-	else
-		return <h1>Product list not found</h1>
+	return <h1>Product list not found</h1>;
 };
 
 export default PreviewCollection;
-

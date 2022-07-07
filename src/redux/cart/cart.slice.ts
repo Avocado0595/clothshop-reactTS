@@ -9,13 +9,13 @@ interface CartState {
 	itemList: ICartItem[];
 }
 
-const initialState: CartState = {itemList: [] };
+const initialState: CartState = { itemList: [] };
 
 export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		clearCart:(state)=>{
+		clearCart: (state) => {
 			state.itemList = [];
 		},
 		addItem: (state, action: PayloadAction<ICartItem>) => {
@@ -52,8 +52,7 @@ export const cartSlice = createSlice({
 	},
 });
 
-export const {  addItem, removeItem, deleteItem, clearCart } =
-	cartSlice.actions;
+export const { addItem, removeItem, deleteItem, clearCart } = cartSlice.actions;
 
 export const selectCartList = (state: RootState) => state.cart.itemList;
 export const selectTotalPrice = (state: RootState) =>

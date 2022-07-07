@@ -5,17 +5,18 @@ import { useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import CartIcon from '../cart/cart-icon/CartIcon';
 import SearchInput from '../search-input/SearchInput';
-import {Col,Container,Modal,Navbar,Row,} from 'react-bootstrap';
+import { Col, Container, Modal, Navbar, Row } from 'react-bootstrap';
 import HeaderNav from '../nav/HeaderNav';
 
 const Header = () => {
-	
 	const [show, setShow] = useState(false);
-	
+
 	const handleShow = () => {
 		setShow(true);
 	};
-
+	const handleHide = () => {
+		setShow(false);
+	};
 	return (
 		<Navbar className="header-nav" bg="light" expand="lg" fixed="top">
 			<Container className="flex-column">
@@ -24,7 +25,7 @@ const Header = () => {
 						<Navbar.Toggle className="ms-0" onClick={handleShow} />
 					</Col>
 
-					<Col className='d-flex col-md-8 col-lg-4 col-xl-4'>
+					<Col className="d-flex col-md-8 col-lg-4 col-xl-4">
 						<Link className="header-link mx-auto" to="/">
 							<div className="header-link--inner">
 								<ReactSVG className="header-logo" src={Logo} />
@@ -36,16 +37,15 @@ const Header = () => {
 					</Col>
 
 					<Col className="d-none d-md-none d-lg-flex d-xl-flex">
-						<SearchInput />
+						<SearchInput handleHide={() => null} />
 					</Col>
 
 					<Col className="d-flex justify-content-end">
-						
 						<Navbar
 							style={{ minWidth: '270px' }}
 							className=" flex-nowrap d-xl-flex d-lg-flex d-md-none align-items-end justify-content-end d-none "
 						>
-							<HeaderNav setShow={setShow}/>
+							<HeaderNav setShow={setShow} />
 						</Navbar>
 						<CartIcon />
 					</Col>
@@ -55,18 +55,20 @@ const Header = () => {
 				show={show}
 				fullscreen="lg-down"
 				onHide={() => setShow(false)}
-				
 			>
 				<Modal.Header closeButton>
-					<Modal.Title><Link onClick={() => setShow(false)} to="/">HOME</Link></Modal.Title>
+					<Modal.Title>
+						<Link onClick={() => setShow(false)} to="/">
+							HOME
+						</Link>
+					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-				<HeaderNav setShow={setShow}/>
-							<SearchInput />
+					<HeaderNav setShow={setShow} />
+					<SearchInput handleHide={handleHide} />
 				</Modal.Body>
 			</Modal>
 		</Navbar>
-		
 	);
 };
 

@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import {
 	addItem,
@@ -11,40 +10,53 @@ import {
 import trashIcon from '../../asserts/trash.svg';
 import './CartCheckout.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectUser } from '../../redux/user/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { createUserCart } from '../../firebase/firebase.utils';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+} from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
+import { getAuth } from 'firebase/auth';
 
-const CartCheckout: FC = () => {
+const CartCheckout = () => {
 	const cartList = useAppSelector((state) => selectCartList(state));
 	const totalPrice = useAppSelector((state) => selectTotalPrice(state));
-	const user = useAppSelector((state)=>selectUser(state));
+	const user = getAuth().currentUser;
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	//modal
-	const [modalState, setModalState] = useState({modal: false});
-	const toggle = ()=>setModalState({modal: !modalState.modal});
-	const commitCheckout = ()=>{
-		modalState.modal?dispatch(clearCart()):null;
-	}
-	const handleCheckout = async()=>{
-		if(!user){
+	const [modalState, setModalState] = useState({ modal: false });
+	const toggle = () => setModalState({ modal: !modalState.modal });
+	const commitCheckout = () => {
+		modalState.modal ? dispatch(clearCart()) : null;
+	};
+	const handleCheckout = async () => {
+		if (!user) {
 			navigate('/signin');
-		}
-		else{
-			await createUserCart(user.uid, cartList.map((c)=>({id: c.id, name: c.name, price: c.price, quantity:c.quantity})))
+		} else {
 			toggle();
+			await createUserCart(
+				user.uid,
+				cartList.map((c) => ({
+					id: c.id,
+					name: c.name,
+					price: c.price,
+					quantity: c.quantity,
+				}))
+			);
 		}
-	}
+	};
 	if (cartList.length !== 0)
 		return (
 			<Container>
 				<h3>Checkout</h3>
-				<Table className='responsive striped'>
+				<Table className="responsive striped">
 					<thead>
 						<tr>
 							<th>Product</th>
@@ -55,7 +67,7 @@ const CartCheckout: FC = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{cartList.map((item, i) => (
+						{cartList.map((item) => (
 							<tr key={item.id}>
 								<td>
 									<img
@@ -100,18 +112,22 @@ const CartCheckout: FC = () => {
 						))}
 					</tbody>
 				</Table>
-				<h3>TOTAL: {totalPrice}$</h3>
-				<button onClick={handleCheckout}>CHECK OUT HERE</button>
-				<Modal isOpen={modalState.modal} toggle={toggle} >
-          <ModalHeader>Checkout done.</ModalHeader>
-          <ModalBody>
-            Yayy! Your cart is waiting for ship.
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={commitCheckout}>I got it!</Button>{' '}
-          </ModalFooter>
-        </Modal>
-
+				<h3>Total: {totalPrice}$</h3>
+				<Button onClick={handleCheckout}>Checkout here</Button>
+				<Modal show={modalState.modal}>
+					<ModalHeader>Checkout</ModalHeader>
+					<ModalBody>
+						Click "Agree" and your cart will be waiting for ship.
+					</ModalBody>
+					<ModalFooter>
+						<Button color="secondary" onClick={toggle}>
+							Cancel
+						</Button>{' '}
+						<Button color="primary" onClick={commitCheckout}>
+							Agree
+						</Button>{' '}
+					</ModalFooter>
+				</Modal>
 			</Container>
 		);
 	else

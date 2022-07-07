@@ -1,29 +1,32 @@
-import { FC, useState } from 'react';
 import './CartIcon.scss';
-import cartIcon from '../../../asserts/shopping-cart.png';
+import cartIcon from '../../../asserts/shopping-cart.svg';
 import { selectCartList } from '../../../redux/cart/cart.slice';
 
 import { useAppSelector } from '../../../redux/hooks';
-import { Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 import CartMenu from '../cart-dropdown/CartMenu';
-const CartIcon: FC = () => {
-	const [dropState, setDropDownState]= useState({dropdownOpen:false})
+const CartIcon = () => {
 	const numberOfItem = useAppSelector(
 		(state) => selectCartList(state).length
 	);
-	const toggle = ()=> {
-		setDropDownState(prevState => ({dropdownOpen: !prevState.dropdownOpen}))
-	};
-
 	return (
 		<Dropdown>
-        <Dropdown.Toggle style={{backgroundColor: 'unset', border:'none', outline:'none', boxShadow:'none'}}>
-			<div className="cart-count"><span className='d-block'>{numberOfItem}</span></div>
-			<img alt="cart" className="cart-icon" src={cartIcon} />
-        </Dropdown.Toggle>
-		<CartMenu/>
-      </Dropdown>
+			<Dropdown.Toggle
+				style={{
+					backgroundColor: 'unset',
+					border: 'none',
+					outline: 'none',
+					boxShadow: 'none',
+				}}
+			>
+				<div className="cart-count">
+					<span className="d-block">{numberOfItem}</span>
+				</div>
+				<img alt="cart" className="cart-icon" src={cartIcon} />
+			</Dropdown.Toggle>
+			<CartMenu />
+		</Dropdown>
 	);
 };
 

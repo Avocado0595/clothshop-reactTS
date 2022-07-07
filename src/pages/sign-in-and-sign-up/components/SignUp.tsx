@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import CustomButton from '../../../components/custom-button/CustomButton';
 import Input from './Input';
 import { createUser } from '../../../firebase/firebase.utils';
-import { Container,Col } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 
-
-export default function SignUp(props:{
-	handleChangeForm:(e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>void,
-	handleLoading:(e:boolean)=>void}) {
-	const {handleChangeForm, handleLoading} = props;
+export default function SignUp(props: {
+	handleChangeForm: (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+	) => void;
+	handleLoading: (e: boolean) => void;
+}) {
+	const { handleChangeForm, handleLoading } = props;
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
@@ -37,7 +39,7 @@ export default function SignUp(props:{
 				setErrMessage({ password: 'Your password is so weak.' });
 			}
 			if ((e as Error).message.toLowerCase().includes('confirmation')) {
-				setErrMessage({ confirmPassword: (e as Error).message});
+				setErrMessage({ confirmPassword: (e as Error).message });
 			}
 		}
 		handleLoading(false);
@@ -45,8 +47,13 @@ export default function SignUp(props:{
 
 	return (
 		<Col className="signform">
-			<h4>SIGN UP</h4>
-			<span>If you aldready have an account, <a onClick={e=>handleChangeForm(e)} href='#'>sign in here.</a></span>
+			<h4 className="form-title">SIGN UP</h4>
+			<span>
+				If you aldready have an account,{' '}
+				<a onClick={(e) => handleChangeForm(e)} href="#">
+					sign in here.
+				</a>
+			</span>
 			<form onSubmit={handleSubmit}>
 				<Input
 					label="Display name"

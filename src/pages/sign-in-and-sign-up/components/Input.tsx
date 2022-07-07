@@ -1,13 +1,13 @@
-import { FC } from 'react';
 import ErrorAlert from '../../../components/error-badge/ErrorAlert';
 import './Input.scss';
-const Input: FC<{
+const Input = (props: {
 	label: string;
 	name: string;
 	type: string;
 	required?: boolean;
 	errMessage?: string;
-}> = ({ name, type, required, label, errMessage }) => {
+}) => {
+	const { name, type, required, label, errMessage } = props;
 	return (
 		<div className="form-group">
 			<input

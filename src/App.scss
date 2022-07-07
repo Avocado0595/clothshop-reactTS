@@ -1,9 +1,9 @@
 $container-max-widths: (
-  sm: 560px ,
-  md: 760px,
-  lg: 980px,
-  xl: 1180px,
-  xxl: 1380px
+	sm: 560px,
+	md: 760px,
+	lg: 980px,
+	xl: 1180px,
+	xxl: 1380px,
 );
 .App {
 	margin-top: 5rem;
@@ -15,29 +15,31 @@ button {
 	font-size: calc(10px + 2vmin);
 }
 @media (min-width: 1400px) {
-	.container{
+	.container {
 		max-width: 1400px !important;
 	}
 }
 
 @media screen and(min-width: 1200px) and (max-width: 1400px) {
-	.container{
+	.container {
 		max-width: 1200px !important;
 	}
 }
-@media screen and(min-width: 992px) and (max-width: 1200px){
-	.container{
+@media screen and(min-width: 992px) and (max-width: 1200px) {
+	.container {
 		max-width: 992px !important;
 	}
 }
 
 @media screen and(min-width: 768px) and(max-width: 992px) {
-	.container{
+	.container {
 		max-width: 768px !important;
 	}
 }
-@media screen and(min-width: 576px) and(max-width: 768px)  {
-	.container{
+@media screen and(min-width: 576px) and(max-width: 768px) {
+	.container {
 		max-width: 576px !important;
 	}
+}
+@media screen and(max-width: 576px) {
 }

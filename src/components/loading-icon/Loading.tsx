@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import { ReactSVG } from 'react-svg';
 import loadingSVG from '../../asserts/loading.svg';
 import './Loading.scss';
-const Loading: FC = () => {
+const Loading = () => {
 	return <ReactSVG src={loadingSVG} className="loading-svg" />;
 };
 

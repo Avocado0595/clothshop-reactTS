@@ -1,15 +1,16 @@
-import React, { FC } from 'react'
 import './LoadingWraper.scss';
 interface WithLoadingProps {
-    loading: boolean;
-  }
-const LoadingSpinner:FC = () => <div>loading...</div>
-  const withLoading = <P extends object>(
-      Component: React.ComponentType<P>): React.FC<P & WithLoadingProps> => ({loading,...props
-  }: WithLoadingProps) =>
-    loading ? <LoadingSpinner /> : <Component {...(props as P)} />;
+	loading: boolean;
+}
+const LoadingSpinner = () => <div>loading...</div>;
+const withLoading =
+	<P extends object>(
+		Component: React.ComponentType<P>
+	): React.FC<P & WithLoadingProps> =>
+	({ loading, ...props }: WithLoadingProps) =>
+		loading ? <LoadingSpinner /> : <Component {...(props as P)} />;
 
-export default withLoading
+export default withLoading;
 /*
     withLoading nhận vào component, 
     <P extends object> ép kiểu tham số thành kiểu (object + P => props)  bắt buộc truyền tham số???

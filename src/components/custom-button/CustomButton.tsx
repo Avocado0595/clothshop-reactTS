@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Col } from 'react-bootstrap';
 import './CustomButton.scss';
 export default function CustomButton(props: {
@@ -7,10 +6,14 @@ export default function CustomButton(props: {
 }) {
 	return (
 		<Col>
-		<Button style={{borderColor:'black', backgroundColor:'black'}} disabled={false} className="custom-btn" type={props.type}>
-			{props.content}
-		</Button>
+			<Button
+				style={{ borderColor: 'black', backgroundColor: 'black' }}
+				disabled={false}
+				className="custom-btn"
+				type={props.type}
+			>
+				{props.content}
+			</Button>
 		</Col>
-		
 	);
 }

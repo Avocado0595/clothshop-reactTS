@@ -7,10 +7,11 @@ import initauth from '../../../firebase/firebase.utils';
 import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 
-export default function SignIn(props:{
-	handleChangeForm:(e:React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>void,
-	handleLoading:(e:boolean)=>void}) {
-	const {handleChangeForm, handleLoading} = props;
+export default function SignIn(props: {
+	handleChangeForm: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+	handleLoading: (e: boolean) => void;
+}) {
+	const { handleChangeForm, handleLoading } = props;
 	const [errMessage, setErrMessage] = useState<Record<string, string>>();
 	const navigate = useNavigate();
 	const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -24,6 +25,8 @@ export default function SignIn(props:{
 		const password = target.password.value; // typechecks!
 		try {
 			await signInWithEmailAndPassword(initauth, email, password);
+
+			navigate(-1);
 		} catch (e) {
 			if ((e as Error).message.includes('user')) {
 				setErrMessage({ email: 'Invalid user name.' });
@@ -32,15 +35,19 @@ export default function SignIn(props:{
 				setErrMessage({ password: 'Wrong password.' });
 			}
 		}
-		navigate(-1);
+
 		handleLoading(false);
 	};
 
 	return (
 		<Col className="signform">
-		
-			<h4>SIGN IN</h4>
-			<span>If you don't have any account, <a onClick={(e)=>handleChangeForm(e)} href='#'>sign up here.</a></span>
+			<h4 className="form-title">SIGN IN</h4>
+			<span>
+				If you don't have any account,{' '}
+				<a onClick={(e) => handleChangeForm(e)} href="#">
+					sign up here.
+				</a>
+			</span>
 			<form
 				onSubmit={handleSubmit}
 				onChange={() => setErrMessage(undefined)}
