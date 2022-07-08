@@ -21,30 +21,6 @@ import BreadcrumbCustom from './components/breadcrumb/BreadcrumbCustom';
 import { Container } from 'react-bootstrap';
 
 import Contact from './pages/contact/Contact';
-// function AppRoute() {
-// 	const currentUser = getAuth().currentUser;
-// 	return (
-// 		<Routes>
-// 			<Route path="/" element={<Homepage />} />
-// 			<Route path="/shop" element={<ShopPage />} />
-// 			<Route path="/contact" element={<Contact />} />
-// 			<Route path="/:collection" element={<Collection />} />
-// 			<Route path="/checkout" element={<CartCheckout />} />
-// 			<Route path="/search" element={<Search />} />
-// 			<Route path="/:collection/:productId" element={<ProductDetail />} />
-// 			<Route
-// 				path="/signin"
-// 				element={
-// 					currentUser ? (
-// 						<Navigate to="/" replace />
-// 					) : (
-// 						<SignInAndSignUp />
-// 					)
-// 				}
-// 			/>
-// 		</Routes>
-// 	);
-// }
 const App = () => {
 	const currentUser = getAuth().currentUser;
 	const dispatch = useAppDispatch();
