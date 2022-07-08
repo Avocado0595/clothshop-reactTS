@@ -14,9 +14,9 @@ ReactDOM.render(
 	
 		<Provider store={store}>
 			<PersistGate persistor={persistor} loading={<LoadingPage />}>
-				<HashRouter basename='/'>
+				<BrowserRouter basename='/'>
 					<App />
-				</HashRouter>
+				</BrowserRouter>
 			</PersistGate>
 		</Provider>
 ,
