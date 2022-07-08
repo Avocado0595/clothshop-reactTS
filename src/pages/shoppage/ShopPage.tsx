@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PreviewCollection from '../../components/preview-collection/PreviewCollection';
 import { getCollectionList } from '../../redux/collection/collection.api';
 
@@ -5,6 +6,7 @@ import { selectCollection } from '../../redux/collection/collection.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProductList } from '../../redux/product/product.slice';
 import { RootState } from '../../redux/store';
+import LoadingPage from '../loading-page/LoadingPage';
 const ShopPage = () => {
 	const dispatch = useAppDispatch();
 	const collectionList = useAppSelector((state: RootState) =>
@@ -13,9 +15,13 @@ const ShopPage = () => {
 	const productList = useAppSelector((state: RootState) =>
 		selectProductList(state)
 	);
-	if (!collectionList || collectionList.length === 0) {
-		dispatch(getCollectionList());
-	}
+	useEffect(()=>{
+		if (!collectionList || collectionList.length === 0) {
+			dispatch(getCollectionList());
+		}
+	}, [dispatch])
+	if(!collectionList)
+		return <LoadingPage/>
 	return (
 		<div>
 			<h3>Explore your style here</h3>
