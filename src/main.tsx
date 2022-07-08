@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import LoadingPage from './pages/loading-page/LoadingPage';
 const persistor = persistStore(store);
 ReactDOM.render(
-	<React.StrictMode>
+	
 		<Provider store={store}>
 			<PersistGate persistor={persistor} loading={<LoadingPage />}>
 				<BrowserRouter basename='/'>
@@ -19,6 +19,6 @@ ReactDOM.render(
 				</BrowserRouter>
 			</PersistGate>
 		</Provider>
-	</React.StrictMode>,
+,
 	document.getElementById('root')
 );
