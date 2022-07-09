@@ -9,3 +9,15 @@
 		width: 100%;
 	}
 }
+.select-form{
+	width: auto !important;
+	font-size: 16px;
+	outline: none !important;
+	box-shadow: none !important;
+}	
+@media screen and (max-width: 576px){
+	.select-form{
+		font-size: 13px !important;
+	}	
+}
+

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import handleSlugName from '../../helpers/handleSlugName';
 import IProduct from '../../interfaces/IProduct';
 import { db } from '../../firebase/firebase.utils';
@@ -52,19 +52,28 @@ export const getProductById = createAsyncThunk(
 export const getProductBycollection = createAsyncThunk(
 	'product/getProductBycollection',
 	async (
-		{ collectionId }: { collectionId: string | undefined },
+		{ collectionId, order }: { collectionId: string | undefined, order: 'desc'| 'asc' | undefined },
 		{ rejectWithValue }
 	) => {
 		const collectionRef = collection(db, 'products');
-		const q = query(
-			collectionRef,
-			where('collectionId', '==', collectionId)
-		);
-		const querySnapshot = await getDocs(q);
-		const result = querySnapshot.docs.map((doc: any) => {
-			return { ...doc.data(), id: handleSlugName(doc.id) } as IProduct;
-		});
-		if (result) return result;
-		return rejectWithValue('Product list not found');
+				const q = !order ? query(
+				collectionRef,
+				where('collectionId', '==', collectionId),	
+			):query(
+				collectionRef,
+				where('collectionId', '==', collectionId),
+				orderBy('price',order)
+			)
+			
+			const querySnapshot = await getDocs(q);
+			const result = querySnapshot.docs.map((doc: any) => {
+				return { ...doc.data(), id: handleSlugName(doc.id) } as IProduct;
+			});
+			if (result) return result;
+		
+	
+			return rejectWithValue('Product list not found');
+		
 	}
 );
+
