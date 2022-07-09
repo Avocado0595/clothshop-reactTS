@@ -4,7 +4,6 @@ import PreviewCollection from '../../components/preview-collection/PreviewCollec
 import IProduct from '../../interfaces/IProduct';
 import { getCollectionByTitle } from '../../redux/collection/collection.api';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getProductBycollection } from '../../redux/product/product.api';
 import { selectProductByCollection } from '../../redux/product/product.slice';
 import { RootState } from '../../redux/store';
 import LoadingPage from '../loading-page/LoadingPage';
@@ -21,12 +20,9 @@ const Collection = () => {
 	useEffect(() => {
 		if (!currentCollection || currentCollection.title !== title) {
 			dispatch(getCollectionByTitle({ title }));
-			dispatch(
-				getProductBycollection({ collectionId: currentCollection?.id })
-			);
 		}
-	}, [dispatch]);
-	if (isLoading) return <LoadingPage />;
+	}, [dispatch, currentCollection]);
+	if (isLoading || currentCollection?.title !== title) return <LoadingPage />;
 
 	if (currentCollection)
 		return (
